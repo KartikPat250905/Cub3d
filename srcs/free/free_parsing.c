@@ -63,6 +63,12 @@ void	free_and_exit(t_scene *scene, int code)
 	free_textures(scene);
 	if (scene -> file)
 		free_file(scene);
+	if (scene -> floor_color)
+		free(scene -> floor_color);
+	if (scene -> cieling_color)
+		free(scene -> cieling_color);
+	scene -> cieling_color = NULL;
+	scene -> floor_color = NULL;
 	scene = NULL;
 	exit(code);
 }

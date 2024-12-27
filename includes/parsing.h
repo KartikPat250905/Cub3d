@@ -10,15 +10,15 @@ typedef struct s_scene
 	char	*south;
 	char	*east;
 	char	*west;
-	int		floor_color[3];
-	int		cieling_color[3];
+	int		*floor_color;
+	int		*cieling_color;
 	char	**file;
 }				t_scene;
 
 typedef enum e_type t_etype;
 
 void	free_and_exit(t_scene *scene, int code);
-int		get_path(t_scene *scene, char *line);
+int	get_path(t_scene *scene, char *line, int i);
 void	parse_north(t_scene *scene, char *line);
 void	parse_south(t_scene *scene, char *line);
 void	parse_east(t_scene *scene, char *line);

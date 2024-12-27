@@ -22,7 +22,7 @@
 # endif
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 100
+#  define BUFFER_SIZE 2000
 # endif
 
 char	*get_next_line(int fd);

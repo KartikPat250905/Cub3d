@@ -50,17 +50,17 @@ int	get_element_type(char *line)
 	t_etype	type;
 
 	type = PARSE_UNKNOWN;
-	if (!ft_strcmp(line, "NO"))
+	if (!ft_strncmp(line, "NO", 2))
 		type = PARSE_NORTH;
-	else if (!ft_strcmp(line, "SO"))
+	else if (!ft_strncmp(line, "SO", 2))
 		type = PARSE_SOUTH;
-	else if (!ft_strcmp(line, "EA"))
+	else if (!ft_strncmp(line, "EA", 2))
 		type = PARSE_EAST;
-	else if (!ft_strcmp(line, "WE"))
+	else if (!ft_strncmp(line, "WE", 2))
 		type = PARSE_WEST;
-	else if (!ft_strcmp(line, "F"))
+	else if (!ft_strncmp(line, "F", 1))
 		type = PARSE_FLOOR;
-	else if (!ft_strcmp(line, "C"))
+	else if (!ft_strncmp(line, "C", 1))
 		type = PARSE_CEILING;
 	else if (line[0] && (line[0] == '0' || line[0] == '1'))
 		type = PARSE_MAP;
@@ -74,13 +74,13 @@ void	fetch_file(t_scene *scene)
 	int		i;
 
 	i = 0;
-	while (scene->file[i])
+	while (scene->file && scene->file[i])
 	{
+		line = scene -> file[i];
 		trim_spaces(&line);
 		if (line == NULL)
 			return ;
 		type = get_element_type(line);
-		printf("The line is :'%s' and the type is %d\n", line,type);
 		if (type == PARSE_UNKNOWN)
 		{
 			printf("The .cub file has some undesired inputs\n");
@@ -99,7 +99,8 @@ t_scene	*parsing_main(char **argv)
 	if (!file_valid(argv[1]))
 		return (NULL);
 	scene = malloc(sizeof(t_scene));
-	ft_bzero(scene, sizeof(scene));
+	scene->cieling_color = malloc(sizeof(int) * 3);
+	scene->floor_color = malloc(sizeof(int) * 3);
 	compress_file(scene, argv[1]);
 	fetch_file(scene);
 	return (scene);
