@@ -62,7 +62,7 @@ int	get_element_type(char *line)
 		type = PARSE_FLOOR;
 	else if (!ft_strcmp(line, "C"))
 		type = PARSE_CEILING;
-	else if (line[0] && line[0] == '0' || line[0] == '1')
+	else if (line[0] && (line[0] == '0' || line[0] == '1'))
 		type = PARSE_MAP;
 	return (type);
 }
@@ -73,16 +73,18 @@ void	fetch_file(t_scene *scene)
 	t_etype	type;
 	int		i;
 
+	i = 0;
 	while (scene->file[i])
 	{
 		trim_spaces(&line);
 		if (line == NULL)
 			return ;
 		type = get_element_type(line);
+		printf("The line is :'%s' and the type is %d\n", line,type);
 		if (type == PARSE_UNKNOWN)
 		{
-			//free and exit
-			return;
+			printf("The .cub file has some undesired inputs\n");
+			free_and_exit(scene, 1);
 		}
 		fill_data(scene, type, line);
 		i++;
@@ -97,6 +99,7 @@ t_scene	*parsing_main(char **argv)
 	if (!file_valid(argv[1]))
 		return (NULL);
 	scene = malloc(sizeof(t_scene));
+	ft_bzero(scene, sizeof(scene));
 	compress_file(scene, argv[1]);
 	fetch_file(scene);
 	return (scene);

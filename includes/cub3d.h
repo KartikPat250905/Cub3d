@@ -1,16 +1,16 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#include "parsing.h"
-#include "libft.h"
-#include "get_next_line_bonus.h"
+# include "parsing.h"
+# include "libft.h"
+# include "get_next_line_bonus.h"
 
-#include <fcntl.h>
-#include <string.h>
-#include <unistd.h>
-#include <stdio.h>
+# include <fcntl.h>
+# include <string.h>
+# include <unistd.h>
+# include <stdio.h>
 
-typedef enum
+typedef enum	e_type
 {
 	PARSE_UNKNOWN = 0,
 	PARSE_NORTH,
