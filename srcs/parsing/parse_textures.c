@@ -9,7 +9,7 @@ void	parse_north(t_scene *scene, char *line)
 	i = open(line + start, O_RDONLY);
 	if (i < 0)
 	{
-		printf("Open failed\n");
+		printf("Open failed north\n");
 		free_and_exit(scene, 1);
 	}
 	close(i);
@@ -25,7 +25,7 @@ void	parse_south(t_scene *scene, char *line)
 	i = open(line + start, O_RDONLY);
 	if (i < 0)
 	{
-		printf("Open failed\n");
+		printf("Open failed south\n");
 		free_and_exit(scene, 1);
 	}
 	close(i);
@@ -41,7 +41,7 @@ void	parse_east(t_scene *scene, char *line)
 	i = open(line + start, O_RDONLY);
 	if (i < 0)
 	{
-		printf("Open failed\n");
+		printf("Open failed east\n");
 		free_and_exit(scene, 1);
 	}
 	close(i);
@@ -57,7 +57,7 @@ void	parse_west(t_scene *scene, char *line)
 	i = open(line + start, O_RDONLY);
 	if (i < 0)
 	{
-		printf("Open failed\n");
+		printf("Open failed west\n");
 		free_and_exit(scene, 1);
 	}
 	close(i);

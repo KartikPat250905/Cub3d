@@ -22,7 +22,7 @@ typedef enum	e_type
 	PARSE_MAP,
 }		t_etype;
 
-void	compress_file(t_scene *scene, char *file);
+int		compress_file(t_scene *scene, char *file);
 int		get_line(char **line, int fd);
 t_scene	*parsing_main(char **argv);
 void	trim_spaces(char **line);

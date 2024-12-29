@@ -8,6 +8,9 @@ SOURCES = srcs/parsing/parsing.c \
 		  srcs/parsing/clean_file.c \
 		  srcs/parsing/fill_data.c \
 		  srcs/parsing/parse_textures.c \
+		  srcs/parsing/parse_colors.c \
+		  srcs/parsing/parse_map.c \
+		  srcs/parsing/parse_utils.c \
 		  srcs/free/free_parsing.c \
 		  main.c \
 

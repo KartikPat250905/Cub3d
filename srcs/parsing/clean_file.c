@@ -71,7 +71,7 @@ void	add_line_to_scene(t_scene *scene, char *line, int i)
 	scene -> file[i] = line;
 }
 
-void	compress_file(t_scene *scene, char *file)
+int	compress_file(t_scene *scene, char *file)
 {
 	int		fd;
 	char	*line;
@@ -89,4 +89,5 @@ void	compress_file(t_scene *scene, char *file)
 		}
 	}
 	close(fd);
+	return (i);
 }

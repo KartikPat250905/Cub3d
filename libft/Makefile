@@ -27,7 +27,7 @@ SRCS := ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 	   get_next_line_utils_bonus.c ft_printcx.c \
 	   ft_printaddress_buf.c ft_printf.c ft_printhex.c ft_printint.c \
        ft_printunsigned.c ft_putchar_buf.c ft_putstr_buf.c argcounter.c \
-	   ft_isspace.c \
+	   ft_isspace.c free_array.c \
 
 OBJS := ${SRCS:.c=.o}
 NAME := libft.a

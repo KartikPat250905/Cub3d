@@ -67,7 +67,7 @@ int	get_element_type(char *line)
 	return (type);
 }
 
-void	fetch_file(t_scene *scene)
+void	fetch_file(t_scene *scene, int len)
 {
 	char	*line;
 	t_etype	type;
@@ -86,7 +86,9 @@ void	fetch_file(t_scene *scene)
 			printf("The .cub file has some undesired inputs\n");
 			free_and_exit(scene, 1);
 		}
-		fill_data(scene, type, line);
+		fill_data(scene, type, line, i, len);
+		if (type == PARSE_MAP)
+			break ;
 		i++;
 	}
 }
@@ -94,14 +96,14 @@ void	fetch_file(t_scene *scene)
 t_scene	*parsing_main(char **argv)
 {
 	t_scene	*scene;
-	//int		fd;
+	int		len;
 
 	if (!file_valid(argv[1]))
 		return (NULL);
 	scene = malloc(sizeof(t_scene));
 	scene->cieling_color = malloc(sizeof(int) * 3);
 	scene->floor_color = malloc(sizeof(int) * 3);
-	compress_file(scene, argv[1]);
-	fetch_file(scene);
+	len = compress_file(scene, argv[1]);
+	fetch_file(scene, len);
 	return (scene);
 }
