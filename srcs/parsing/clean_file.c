@@ -16,7 +16,7 @@ void	trim_spaces(char **line)
 	if (start == 0 && end == ft_strlen(*line) - 1)
 		return ;
 	len = end - start;
-	str = malloc(sizeof(char) * (len + 1));
+	str = malloc(sizeof(char) * (len + 2));
 	if (!str)
 		return ;
 	ft_strlcpy(str, *line + start, len + 2);
@@ -77,7 +77,7 @@ int	compress_file(t_scene *scene, char *file)
 	char	*line;
 	int		i;
 
-	scene -> file = malloc(sizeof(char *) * (ft_count_flines(file) + 2));
+	scene -> file = ft_calloc((ft_count_flines(file) + 2), sizeof(char *));
 	fd = open(file, O_RDONLY);
 	i = 0;
 	while (get_line(&line, fd))

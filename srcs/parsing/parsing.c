@@ -97,10 +97,11 @@ t_scene	*parsing_main(char **argv)
 
 	if (!file_valid(argv[1]))
 		return (NULL);
-	scene = malloc(sizeof(t_scene));
+	scene = ft_calloc(1, sizeof(t_scene));
 	scene->cieling_color = malloc(sizeof(int) * 3);
 	scene->floor_color = malloc(sizeof(int) * 3);
 	len = compress_file(scene, argv[1]);
 	fetch_file(scene, len);
+	check_if_data_fetched(scene);
 	return (scene);
 }

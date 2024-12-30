@@ -5,13 +5,13 @@
             "name": "Debug Cube3D",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/cub3D", 
-            "args": ["path/to/map.cub"], 
+            "program": "${workspaceFolder}/cub3D",
+            "args": ["test.cub"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": false,
-            "MIMode": "lldb",
+            "MIMode": "gdb",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
@@ -19,7 +19,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "miDebuggerPath": "/usr/bin/lldb"
+            "miDebuggerPath": "/usr/bin/gdb"
         }
     ]
 }

@@ -13,7 +13,7 @@ void	add_rgb(t_scene *scene, char **splits, int who)
 	while (i < 3)
 	{
 		color[i] = ft_atoi(splits[i]);
-		if (color[i] <= 0 || color[i] >= 255)
+		if (color[i] < 0 || color[i] > 255)
 			perror_and_exit(scene, "Error with the color values.", 1);
 		i++;
 	}
@@ -27,13 +27,14 @@ void	get_colors(t_scene *scene, char *line, int who)
 	char	**splits;
 
 	i = 0;
+	len = 0;
 	while (line[i])
 	{
 		if (!ft_isspace(line[i]))
 			len++;
 		i++;
 	}
-	no_spaces = malloc(sizeof(char) * len);
+	no_spaces = ft_calloc((len + 1), sizeof(char));
 	i = 0;
 	len = 0;
 	while (line[i])

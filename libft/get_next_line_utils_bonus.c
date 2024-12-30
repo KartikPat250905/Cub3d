@@ -75,20 +75,3 @@ char	*ft_strjoin_gnl_bonus(char const *s1, char const *s2)
 	res[sizetotal] = 0;
 	return (res);
 }
-
-void	*ft_calloc(size_t elementCount, size_t elementSize)
-{
-	char	*res;
-	size_t	i;
-
-	res = malloc(elementSize * elementCount);
-	if (!res)
-		return (NULL);
-	i = 0;
-	while (i < elementCount)
-	{
-		res[i] = '\0';
-		i++;
-	}
-	return (res);
-}

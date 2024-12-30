@@ -5,7 +5,7 @@
 
 typedef struct s_scene
 {
-	int		**map;
+	char	**map;
 	char	*north;
 	char	*south;
 	char	*east;
@@ -17,6 +17,7 @@ typedef struct s_scene
 
 typedef enum e_type t_etype;
 
+void	check_if_data_fetched(t_scene *scene);
 void	free_and_exit(t_scene *scene, int code);
 int		get_path(t_scene *scene, char *line, int i);
 void	parse_north(t_scene *scene, char *line);
@@ -29,6 +30,6 @@ void	get_colors(t_scene *scene, char *line, int who);
 void	add_rgb(t_scene *scene, char **splits, int who);
 void	parse_map(t_scene *scene, int index, int len);
 void	change_space(char **file, int row, int col, int ch);
-
+int		get_element_type(char *line);
 
 #endif
