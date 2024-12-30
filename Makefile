@@ -12,6 +12,7 @@ SOURCES = srcs/parsing/parsing.c \
 		  srcs/parsing/parse_map.c \
 		  srcs/parsing/parse_utils.c \
 		  srcs/free/free_parsing.c \
+		  srcs/free/error.c \
 		  main.c \
 
 OBJECTS = $(SOURCES:.c=.o)

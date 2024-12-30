@@ -14,10 +14,7 @@ void	add_rgb(t_scene *scene, char **splits, int who)
 	{
 		color[i] = ft_atoi(splits[i]);
 		if (color[i] <= 0 || color[i] >= 255)
-		{
-			printf("Error with the color values.\n");
-			free_and_exit(scene, 1);
-		}
+			perror_and_exit(scene, "Error with the color values.", 1);
 		i++;
 	}
 }

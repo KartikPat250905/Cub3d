@@ -30,4 +30,5 @@ void	add_rgb(t_scene *scene, char **splits, int who);
 void	parse_map(t_scene *scene, int index, int len);
 void	change_space(char **file, int row, int col, int ch);
 
+
 #endif

@@ -82,10 +82,7 @@ void	fetch_file(t_scene *scene, int len)
 			return ;
 		type = get_element_type(line);
 		if (type == PARSE_UNKNOWN)
-		{
-			printf("The .cub file has some undesired inputs\n");
-			free_and_exit(scene, 1);
-		}
+			perror_and_exit(scene, "The .cub file has some undesired inputs", 1);
 		fill_data(scene, type, line, i, len);
 		if (type == PARSE_MAP)
 			break ;

@@ -9,10 +9,7 @@ int	get_path(t_scene *scene, char *line, int i)
 	while (line[i] && ft_isspace(line[i]))
 		i++;
 	if (i == j)
-	{
-		printf("Error with the path for the texture\n");
-		free_and_exit(scene, 1);
-	}
+		perror_and_exit(scene, "Error with the path for the texture\n", 1);
 	start = i;
 	return (start);
 }
