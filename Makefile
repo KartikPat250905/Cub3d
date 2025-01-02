@@ -1,8 +1,13 @@
 NAME = cub3D
 CC = cc
-INCLUDES = -Iincludes
+INCLUDES = -Iincludes -I $(MLX)/include
 CFLAGS = -g -Wall -Wextra -Werror
 LIBFT = ./libft
+
+# MLX
+LIBMLX		:=	MLX42/build/libmlx42.a
+MLX		:=	./MLX42
+LIBS            :=  $(LIBMLX) -ldl -lglfw -pthread -lm
 
 SOURCES = srcs/parsing/parsing.c \
 		  srcs/parsing/clean_file.c \
@@ -22,8 +27,13 @@ all: $(NAME)
 $(LIBFT)/libft.a:
 	make -C $(LIBFT)
 
-$(NAME): $(OBJECTS) $(LIBFT)/libft.a
-	$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT)/libft.a -o $(NAME)
+$(NAME): $(OBJECTS) $(LIBFT)/libft.a $(LIBMLX)
+	$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT)/libft.a $(LIBS) -o $(NAME)
+
+$(LIBMLX): mlx_clone
+	@if [ ! -f "$(LIBMLX)" ]; then \
+		cmake $(MLX) -B $(MLX)/build && make -C $(MLX)/build -j4; \
+	fi
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
@@ -35,7 +45,14 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 	make -C $(LIBFT) fclean
+	@rm -rf $(MLX)/build
 
 re: fclean all
 
-.PHONY: all clean fclean re
+mlx_clone:
+	@if [ ! -d "$(MLX)" ]; then \
+		git clone https://github.com/codam-coding-college/MLX42.git $(MLX); \
+	fi
+
+.PHONY: all clean fclean re mlx_clone
+
