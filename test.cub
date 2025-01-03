@@ -3,18 +3,18 @@
 
 
 F 77,92,53
-C 163,208,255
+C 163,208,252
 
 
 
+EA ./textures/wood.xpm
 NO ./textures/greystone.xpm
 SO ./textures/purplestone.xpm
 WE ./textures/redbrick.xpm
-EA ./textures/wood.xpm
-
 
 
 1111111111111111111111111
+10000000 011000N000000001
 1000000000110000000000001
 1011000011100000000000001
 1001000000000000000000001

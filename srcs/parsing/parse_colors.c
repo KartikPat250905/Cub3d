@@ -12,11 +12,15 @@ void	add_rgb(t_scene *scene, char **splits, int who)
 		color = scene->cieling_color;
 	while (i < 3)
 	{
+		if (!ft_is_num_str(splits[i]))
+			perror_and_exit(scene, "Error the color values are not integers.", 1);
 		color[i] = ft_atoi(splits[i]);
 		if (color[i] < 0 || color[i] > 255)
 			perror_and_exit(scene, "Error with the color values.", 1);
 		i++;
 	}
+	if (splits[3] != NULL)
+		perror_and_exit(scene, "Error the colors have more stuff than RGB", 1);
 }
 
 void	get_colors(t_scene *scene, char *line, int who)
@@ -53,6 +57,8 @@ void	parse_color(t_scene *scene, char *line, int is_cieling)
 {
 	int	start;
 
+	if (line[ft_strlen(line) - 1] == ',')
+		perror_and_exit(scene, "Extra comma at the end of the colors.", 1);
 	start = get_path(scene, line, 1);
 	get_colors(scene, line + start, is_cieling);
 }
