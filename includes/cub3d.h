@@ -1,14 +1,82 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+// -- Includes --
+
+// Libraries
+#include <fcntl.h>        // open
+#include <unistd.h>       // close, read, write
+#include <stdio.h>        // printf, perror
+#include <stdlib.h>       // malloc, free, exit
+#include <string.h>       // strerror
+#include <sys/time.h>     // gettimeofday
+#include <math.h>         // All functions of the math library
+
+// Header files
 # include "parsing.h"
 # include "libft.h"
 # include "get_next_line_bonus.h"
 
-# include <fcntl.h>
-# include <string.h>
-# include <unistd.h>
-# include <stdio.h>
+// -- TYPEDEFS --
+
+typedef struct s_ray
+{
+	// X-coordinate in camera space (-1 to 1)
+	float	cam_x;
+
+	// Direction of ray
+	float	dir_x;
+	float	dir_y;
+
+	// coordinates on map grid
+	int	map_x;
+	int	map_y;
+
+	// Distance to first grid sides
+	float	s_dist_x;
+	float	s_dist_y;
+
+	// Distance to the next grid sides
+	float	d_dist_x;
+	float	d_dist_y;
+
+	// Length of the ray
+	float	prop_wall_dist;
+
+	// Neg or pos direction
+	int	step_x;
+	int	step_y;
+
+	// If a wall was hit
+	int	hit;
+
+	// x-side or y-side
+	int	side;
+
+}	t_ray;
+
+typedef struct s_player
+{
+	// Player's position coordinates
+	float	pos_x;
+	float	pos_y;
+
+	// The position in front of the player
+	float	dir_x;
+	float	dir_y;
+
+	// The camera plane (determines FOV)
+	float	pln_x;
+	float	pln_y;
+
+}	t_player;
+
+typedef struct s_game
+{
+	t_scene	*scene;
+	t_player	plr;
+	t_ray		ray;
+}	t_game;
 
 typedef enum	e_type
 {
@@ -22,6 +90,17 @@ typedef enum	e_type
 	PARSE_MAP,
 }		t_etype;
 
+// -- MACROS --
+
+# define SCREEN_W 1280
+# define SCREEN_H 1024
+
+// -- FUNCTION PROTOTYPES --
+
+//	game_initialization.c
+int	init_game(t_game *game);
+
+// ?
 int		compress_file(t_scene *scene, char *file);
 int		get_line(char **line, int fd);
 t_scene	*parsing_main(char **argv);
