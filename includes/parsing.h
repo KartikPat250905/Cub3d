@@ -13,6 +13,8 @@ typedef struct s_scene
 	int		*floor_color;
 	int		*cieling_color;
 	char	**file;
+	// starting direction?
+	// starting pos?
 }				t_scene;
 
 typedef enum e_type t_etype;
