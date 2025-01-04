@@ -16,8 +16,16 @@
 # include "parsing.h"
 # include "libft.h"
 # include "get_next_line_bonus.h"
+# include "MLX42/include/MLX42/MLX42.h"
 
 // -- TYPEDEFS --
+
+typedef struct s_mlx
+{
+	mlx_t		*mlx;
+	mlx_image_t	*img;
+	t_screen	s;
+}			t_mlx;
 
 typedef struct s_ray
 {
@@ -73,9 +81,10 @@ typedef struct s_player
 
 typedef struct s_game
 {
-	t_scene	*scene;
+	t_scene		*scene;
 	t_player	plr;
 	t_ray		ray;
+	t_mlx		*mlx;
 }	t_game;
 
 typedef enum	e_type
@@ -94,6 +103,7 @@ typedef enum	e_type
 
 # define SCREEN_W 1280
 # define SCREEN_H 1024
+# define SPEED 5
 
 // -- FUNCTION PROTOTYPES --
 
