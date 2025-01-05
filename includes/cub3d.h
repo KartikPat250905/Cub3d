@@ -72,5 +72,7 @@ int		get_line(char **line, int fd);
 t_scene	*parsing_main(char **argv);
 void	trim_spaces(char **line);
 void	perror_and_exit(t_scene *scene, char *str, int exit);
+void	handle_keys(mlx_key_data_t keydata, void *param);
+int		is_wall(t_data *data, float ray_x, float ray_y);
 
 #endif
