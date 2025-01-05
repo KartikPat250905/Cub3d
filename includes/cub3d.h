@@ -10,10 +10,16 @@
 # include <unistd.h>
 # include <stdio.h>
 # include "MLX42/MLX42.h"
+# include <math.h>
 
+# define PI 3.14159265358979323846
 # define WIN_WIDTH 800
 # define WIN_HEIGHT 600
 # define TILE_SIZE 64
+# define FOV PI/3
+# define PI_2 PI/2
+# define DISTANCE_PROJECTION_PLANE (WIN_WIDTH / 2) / tan(FOV / 2)
+# define MAX_DISTANCE (TILE_SIZE * 15)
 
 typedef enum	e_type
 {
@@ -26,6 +32,25 @@ typedef enum	e_type
 	PARSE_CEILING,
 	PARSE_MAP,
 }		t_etype;
+
+typedef struct	s_dda
+{
+	int		tile_x;
+	int		tile_y;
+	float	hor_step_x;
+	float	hor_step_y;
+	float	vert_step_y;
+	float	vert_step_x;
+	float	dx;
+	float	dy;
+	float	distance_hor;
+	float	distance_vert;
+	float	hor_yn;
+	float	hor_xn;
+	float	vert_xn;
+	float	vert_yn;
+	float	min_dist;
+}				t_dda;
 
 typedef struct	s_player
 {
