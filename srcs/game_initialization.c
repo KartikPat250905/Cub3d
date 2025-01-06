@@ -17,25 +17,27 @@ static void	init_mlx(t_scene *scene, t_mlx *mlx)
 	}
 }
 
-void	get_angle(t_game *game, char ch)
+void	get_angle(char ch, t_player *plr)
 {
 	if (ch == 'N')
-		game->plr.angle = 90 * (M_PI / 180);
+		plr->angle = 90 * (M_PI / 180);
 	else if (ch == 'E')
-		game->plr.angle = 0;
+		plr->angle = 0;
 	else if (ch == 'W')
-		game->plr.angle = 180 * (M_PI / 180);
+		plr->angle = 180 * (M_PI / 180);
 	else if (ch == 'S')
-		game->plr.angle = 270 * (M_PI / 180);
+		plr->angle = 270 * (M_PI / 180);
 }
 
-static void	set_starting_pos(t_game *game)
+static t_player	*set_starting_pos(t_game *game)
 {
 	int		x;
 	int		y;
 	char	ch;
+	t_player	*player;
 
 	x = 0;
+	player = malloc(sizeof(t_player));
 	while (game->scene->map[x])
 	{
 		y = 0;
@@ -45,25 +47,25 @@ static void	set_starting_pos(t_game *game)
 			if (ch == 'N' || ch == 'S' || ch == 'E' || ch == 'W')
 			{
 				printf("posx = %f, posy = %f\n", (float)x, (float)y);
-				game->plr.pos_x = (float)x;
-				game->plr.pos_y = (float)y;
-				get_angle(game, ch);
+				player->pos_x = (float)x;
+				player->pos_y = (float)y;
+				get_angle(ch, player);
 				break ;
 			}
 			y++;
 		}
 		x++;
 	}
+	return (player);
 }
 
 int	init_game(t_game *game, int ac, char **av)
 {
 	if (ac != 2)
 		return (0);
-	game = malloc(sizeof(t_game));
 	game->mlx = malloc(sizeof(t_mlx));
 	game->scene = parsing_main(av);
-	set_starting_pos(game);
+	game->plr = *set_starting_pos(game);
 	if (!game->scene)
 		return (0);
 	init_mlx(game->scene, game->mlx);

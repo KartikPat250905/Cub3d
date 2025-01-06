@@ -97,9 +97,11 @@ static	int	raycast_loop(t_scene *scene, t_player *plr, t_ray *ray)
 
 int	main(int ac, char **av)
 {
-	t_game	game;
+	t_game	*game;
 
-	if (!init_game(&game, ac, av))
+	game = malloc(sizeof(t_game));
+	if (!init_game(game, ac, av))
 		return (1);
-	return(raycast_loop(game.scene, &game.plr, &game.ray));
+	printf("In main posx = %f, posy = %f\n", game->plr.pos_x, game->plr.pos_y);
+	return(raycast_loop(game->scene, &game->plr, &game->ray));
 }
