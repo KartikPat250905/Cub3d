@@ -17,6 +17,30 @@ static void	init_mlx(t_scene *scene, t_mlx *mlx)
 	}
 }
 
+static void	set_angle(t_game *game, char dir)
+{
+	if (dir == 'N')
+	{
+		game->plr.dir_x = game->plr.dir_x;
+		game->plr.dir_y = game->plr.dir_x + 3;
+	}
+	else if (dir == 'S')
+	{
+		game->plr.dir_x = game->plr.dir_x;
+		game->plr.dir_y = game->plr.dir_x - 3;
+	}
+	else if (dir == 'W')
+	{
+		game->plr.dir_x = game->plr.dir_x + 3;
+		game->plr.dir_y = game->plr.dir_x;
+	}
+	else if (dir == 'E')
+	{
+		game->plr.dir_x = game->plr.dir_x - 3;
+		game->plr.dir_y = game->plr.dir_x;
+	}
+}
+
 void	get_angle(char ch, t_player *plr)
 {
 	if (ch == 'N')
@@ -49,6 +73,7 @@ static t_player	*set_starting_pos(t_game *game)
 				printf("posx = %f, posy = %f\n", (float)x, (float)y);
 				player->pos_x = (float)x;
 				player->pos_y = (float)y;
+				set_angle(game, ch);
 				get_angle(ch, player);
 				break ;
 			}

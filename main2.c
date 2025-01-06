@@ -38,7 +38,7 @@ static void	update_values(t_player *plr, t_ray *ray, int x)
 
 	// Which box of the map we're in
 	ray->map_x = (int)plr->pos_x;
-	ray->map_x = (int)plr->pos_y;
+	ray->map_y = (int)plr->pos_y;
 
 	// Distance until next vertical grid side
 	if (ray->dir_x == 0)
