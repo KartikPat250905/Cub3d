@@ -1,14 +1,14 @@
-#include "includes/cub3d.h"
+#include "../includes/cub3d.h"
 
 static void	init_mlx(t_scene *scene, t_mlx *mlx)
 {
-	mlx->mlx = mlx_init(RES_X, RES_Y, "cub3d", true);
+	mlx->mlx = mlx_init(SCREEN_W, SCREEN_H, "cub3d", true);
 	if (!mlx)
 	{
 		free_and_exit(scene, EXIT_FAILURE);
 		exit(EXIT_FAILURE);
 	}
-	mlx->img = mlx_new_image(mlx->mlx, RES_X, RES_Y);
+	mlx->img = mlx_new_image(mlx->mlx, SCREEN_W, SCREEN_H);
 	if (!mlx->img)
 	{
 		mlx_terminate(mlx->mlx);
@@ -32,8 +32,10 @@ static void	set_starting_pos(t_game *game)
 	*/
 }
 
-int	init_game(t_game *game)
+int	init_game(t_game *game, int ac, char **av)
 {
+	if (ac != 2)
+		return (0);
 	game->scene = parsing_main(av);
 	if (!game->scene)
 		return (0);
