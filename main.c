@@ -20,7 +20,7 @@ int	is_wall(t_data *data, int x, int y)
 		int map_width = strlen(data->scene->map[map_y]);
 		if (map_x >= 0 && map_x < map_width)
 		{
-			if (data->scene->map[map_y][map_x] == '1') 
+			if (data->scene->map[map_y][map_x] == '1')
 				return 1;
 		}
 	}
@@ -70,7 +70,6 @@ float	dda(t_data *data, float angle)
 		vars.vert_step_x *= -1;
 	if (angle > PI)
 		vars.vert_step_y *= -1;
-
 	if (angle < PI)
 		vars.hor_yn = floor(data->player.y / TILE_SIZE) * TILE_SIZE;
 	else if (angle > PI)
@@ -103,7 +102,7 @@ void	render_col(t_data *data, int x, float distance, int color)
 	int	wall_height;
 	int	y;
 
-	wall_height = (TILE_SIZE / distance) * 7;
+	wall_height = (TILE_SIZE / distance) * 150;
 	if (distance > MAX_DISTANCE)
 		wall_height = 0;
 	wall_top = (WIN_HEIGHT / 2) - (wall_height / 2);
@@ -166,9 +165,9 @@ int	main(int ac, char **av)
 	printf("The floor R=%d G=%d and B=%d\n", scene -> floor_color[0], scene->floor_color[1],scene->floor_color[2]);
 	printf("The cieling R=%d G=%d and B=%d\n", scene -> cieling_color[0], scene->cieling_color[1],scene->cieling_color[2]);
 	int i = 0;
-	data.player.x = 1 * TILE_SIZE;
-	data.player.y = 1 * TILE_SIZE;
-	data.player.angle = 90 * (PI / 180);
+	data.player.x = 2 * TILE_SIZE;
+	data.player.y = 2 * TILE_SIZE;
+	data.player.angle = 0;
 	printf("The direction of the player is %f from x axis\n", data.player.angle);
 	while (scene->map[i])
 		printf("%s\n",scene->map[i++]);
