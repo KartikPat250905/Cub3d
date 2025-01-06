@@ -16,7 +16,7 @@
 # include "parsing.h"
 # include "libft.h"
 # include "get_next_line_bonus.h"
-# include "MLX42/include/MLX42/MLX42.h"
+# include "MLX42/MLX42.h"
 
 // -- TYPEDEFS --
 
@@ -24,7 +24,7 @@ typedef struct s_mlx
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
-	t_screen	s;
+	t_scene	s;
 }			t_mlx;
 
 typedef struct s_ray
@@ -49,7 +49,7 @@ typedef struct s_ray
 	float	d_dist_y;
 
 	// Length of the ray
-	float	prop_wall_dist;
+	float	p_dist;
 
 	// Neg or pos direction
 	int	step_x;
@@ -114,7 +114,7 @@ typedef enum	e_type
 // -- FUNCTION PROTOTYPES --
 
 //	game_initialization.c
-int	init_game(t_game *game);
+int	init_game(t_game *game, int ac, char **av);
 
 // ?
 int		compress_file(t_scene *scene, char *file);

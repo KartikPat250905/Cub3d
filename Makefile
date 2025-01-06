@@ -18,7 +18,8 @@ SOURCES = srcs/parsing/parsing.c \
 		  srcs/parsing/parse_utils.c \
 		  srcs/free/free_parsing.c \
 		  srcs/free/error.c \
-		  main.c \
+		  main2.c \
+		  srcs/game_initialization.c \
 
 OBJECTS = $(SOURCES:.c=.o)
 
@@ -35,7 +36,7 @@ $(LIBMLX): mlx_clone
 		cmake $(MLX) -B $(MLX)/build && make -C $(MLX)/build -j4; \
 	fi
 
-%.o: %.c
+%.o: %.c mlx_clone
 	$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
 
 clean:
