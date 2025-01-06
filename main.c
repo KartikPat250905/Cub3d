@@ -20,7 +20,7 @@ float distance_calc(float x, float y, float x1, float y1)
 // 		int map_width = strlen(data->scene->map[map_y]);
 // 		if (map_x >= 0 && map_x < map_width)
 // 		{
-// 			if (data->scene->map[map_y][map_x] == '1') 
+// 			if (data->scene->map[map_y][map_x] == '1')
 // 				return 1;
 // 		}
 // 	}
@@ -128,8 +128,8 @@ double normalize_angle(double angle)
 
 int	is_wall(t_data *data, float ray_x, float ray_y)
 {
-	if (data->scene->map[(int)ray_y][(int)ray_x]
-		&& data->scene->map[(int)ray_y][(int)ray_x] == '1')
+	if (data->scene->map[(int)ray_y / TILE_SIZE][(int)ray_x / TILE_SIZE]
+		&& data->scene->map[(int)ray_y / TILE_SIZE][(int)ray_x/ TILE_SIZE] == '1')
 		return (1);
 	return (0);
 }
@@ -177,7 +177,7 @@ void	draw_rays(t_data *data)
 		corrected_distance = distance * cos(angle - data->player.angle);
 		if (corrected_distance < 0.1)
 			corrected_distance = 0.1;
-		wall_height = (TILE_SIZE / corrected_distance) * 150;
+		wall_height = (TILE_SIZE / corrected_distance) * 600;
 		start_y = (WIN_HEIGHT / 2) - (wall_height / 2);
 		end_y = (WIN_HEIGHT / 2) + (wall_height / 2);
 		if (start_y < 0)
@@ -223,8 +223,8 @@ int	main(int ac, char **av)
 	printf("The floor R=%d G=%d and B=%d\n", scene -> floor_color[0], scene->floor_color[1],scene->floor_color[2]);
 	printf("The cieling R=%d G=%d and B=%d\n", scene -> cieling_color[0], scene->cieling_color[1],scene->cieling_color[2]);
 	int i = 0;
-	data.player.x = 2;
-	data.player.y = 3;
+	data.player.x = 2 * TILE_SIZE;
+	data.player.y = 3 * TILE_SIZE;
 	data.player.angle = 0.0;
 	printf("The direction of the player is %f from x axis\n", data.player.angle);
 	while (scene->map[i])
@@ -236,12 +236,6 @@ int	main(int ac, char **av)
 	if (!data.img)
 		return (1);
 	data.scene = scene;
-	if (is_wall(&data, data.player.x, data.player.y))
-	{
-		printf("Error: Player starts inside a wall\n");
-		free_and_exit(data.scene, 1);
-		return 0;
-	}
 	mlx_image_to_window(data.mlx, data.img, 0, 0);
 	mlx_loop_hook(data.mlx, (void (*)(void *))render, &data);
 	mlx_loop(data.mlx);
