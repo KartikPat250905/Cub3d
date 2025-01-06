@@ -58,6 +58,16 @@ static void	update_values(t_player *plr, t_ray *ray, int x)
 		ray->d_dist_y *= (-1);
 
 	calculate_step_and_dist(plr, ray);
+	
+	printf("---\n");
+	printf("ray map_x : %d\n", ray->map_x);
+	printf("ray map_y : %d\n", ray->map_y);
+	printf("plr_x = %f\n", plr->pos_x);
+	printf("plr_y = %f\n", plr->pos_y);
+	printf("plr dir_x = %f\n", plr->dir_x);
+	printf("plr dir_y = %f\n", plr->dir_y);
+	printf("ray dir_x = %f\n", ray->dir_x);
+	printf("ray dir_y = %f\n", ray->dir_y);
 }
 
 static void	draw_column(t_game *game, int x)
@@ -68,13 +78,16 @@ static void	draw_column(t_game *game, int x)
 	int	color;
 
 
+	printf("ray.p_dist = %f\n", game->ray.p_dist);
+	// p dist is 0 sometimes 
 	line_height = (int)(SCREEN_H / game->ray.p_dist);
+	printf("line_height : %d\n", line_height);
 	//printf("line height: %d\n", line_height);
 	draw_start = -line_height / 2 + SCREEN_H / 3;
 	if (draw_start < 0)
 		draw_start = 0;
 	draw_end = line_height / 2 + SCREEN_H / 2;
-	if (draw_end < SCREEN_H)
+	if (draw_end > SCREEN_H)
 		draw_end = SCREEN_H - 1;
 	color = 0xFF0000FF;
 	printf("draw_start : %d, draw_end : %d\n", draw_start, draw_end);
@@ -111,7 +124,6 @@ static	int	raycast_loop(t_game *game, t_scene *scene, t_player *plr, t_ray *ray)
 
 	x = -1;
 	background_color(game->mlx, 0x0000FFFF);
-	// Goes through every vertical stripe of the screen
 	while (++x < SCREEN_W)
 	{
 		update_values(plr, ray, x);
@@ -131,12 +143,22 @@ static	int	raycast_loop(t_game *game, t_scene *scene, t_player *plr, t_ray *ray)
 				ray->side = 1;
 			}
 			if (scene->map && scene->map[ray->map_x] && scene->map[ray->map_x][ray->map_y] == '1')
+			{
+				printf("x : %d, y : %d\n", ray->map_x, ray->map_y);
+				printf("Map location char : %c\n", scene->map[ray->map_x][ray->map_y]);
+				printf("ray->s_dist_x : %f, ray->s_dist_y : %f\n", ray->s_dist_x, ray->s_dist_y);
+				printf("ray->d_dist_x : %f, ray->d_dist_y : %f\n", ray->d_dist_x, ray->d_dist_y);
+				exit(1);
 				ray->hit = 1;
+			}
 		}
+		//printf("ray->s_dist_x : %f, ray->s_dist_y : %f\n", ray->s_dist_x, ray->s_dist_y);
+		//printf("ray->d_dist_x : %f, ray->d_dist_y : %f\n", ray->d_dist_x, ray->d_dist_y);
 		if (ray->side == 0)
 			ray->p_dist = ray->s_dist_x - ray->d_dist_x;
 		else
 			ray->p_dist = ray->s_dist_y - ray->d_dist_y;
+		printf("p_dist : %f\n", ray->p_dist);
 		draw_column(game, x);
 	}
 	if (mlx_image_to_window(game->mlx->mlx, game->mlx->img, 0, 0) < 0)
@@ -149,7 +171,7 @@ static void game_loop(void *ptr)
 	t_game *game;
 
 	game = (t_game *)ptr;
-	raycast_loop(game, game->scene, &game->plr, &game->ray);
+	raycast_loop(game, game->scene, game->plr, &game->ray);
 }
 
 int	main(int ac, char **av)

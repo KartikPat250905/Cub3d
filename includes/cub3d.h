@@ -84,7 +84,7 @@ typedef struct s_player
 typedef struct s_game
 {
 	t_scene		*scene;
-	t_player	plr;
+	t_player	*plr;
 	t_ray		ray;
 	t_mlx		*mlx;
 }	t_game;

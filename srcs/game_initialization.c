@@ -17,35 +17,35 @@ static void	init_mlx(t_scene *scene, t_mlx *mlx)
 	}
 }
 
-static void	set_angle(t_game *game, char dir)
+static void	set_angle(t_player *plr, char dir)
 {
 	if (dir == 'N')
 	{
-		game->plr.dir_x = 0;
-		game->plr.dir_y = -1;
-		game->plr.pln_x = 0.66;
-		game->plr.pln_y = 0;
+		plr->dir_x = 0;
+		plr->dir_y = -1;
+		plr->pln_x = 2;
+		plr->pln_y = 0;
 	}
 	else if (dir == 'S')
 	{
-		game->plr.dir_x = 0;
-		game->plr.dir_y = 1;
-		game->plr.pln_x = -0.66;
-		game->plr.pln_y = 0;
+		plr->dir_x = 0;
+		plr->dir_y = 1;
+		plr->pln_x = -2;
+		plr->pln_y = 0;
 	}
 	else if (dir == 'W')
 	{
-		game->plr.dir_x = 1;
-		game->plr.dir_y = 0;
-		game->plr.pln_x = 0;
-		game->plr.pln_y = 0.66;
+		plr->dir_x = -1;
+		plr->dir_y = 0;
+		plr->pln_x = 0;
+		plr->pln_y = -2;
 	}
 	else if (dir == 'E')
 	{
-		game->plr.dir_x = -1;
-		game->plr.dir_y = 0;
-		game->plr.pln_x = 0;
-		game->plr.pln_y = -0.66;
+		plr->dir_x = 1;
+		plr->dir_y = 0;
+		plr->pln_x = 0;
+		plr->pln_y = 2;
 	}
 }
 
@@ -79,10 +79,10 @@ static t_player	*set_starting_pos(t_game *game)
 			if (ch == 'N' || ch == 'S' || ch == 'E' || ch == 'W')
 			{
 				printf("posx = %f, posy = %f\n", (float)x, (float)y);
-				player->pos_x = (float)x;
-				player->pos_y = (float)y;
-				set_angle(game, ch);
+				player->pos_x = (float)y;
+				player->pos_y = (float)x;
 				get_angle(ch, player);
+				set_angle(player, ch);
 				break ;
 			}
 			y++;
@@ -98,9 +98,7 @@ int	init_game(t_game *game, int ac, char **av)
 		return (0);
 	game->mlx = malloc(sizeof(t_mlx));
 	game->scene = parsing_main(av);
-	game->plr = *set_starting_pos(game);
-	game->plr.pln_x = 0;
-	game->plr.pln_x = 0;
+	game->plr = set_starting_pos(game);
 	if (!game->scene)
 		return (0);
 	init_mlx(game->scene, game->mlx);
