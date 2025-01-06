@@ -16,7 +16,7 @@
 # include "parsing.h"
 # include "libft.h"
 # include "get_next_line_bonus.h"
-# include "MLX42/MLX42.h"
+# include "../MLX42/include/MLX42/MLX42.h"
 
 // -- TYPEDEFS --
 
