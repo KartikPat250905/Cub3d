@@ -84,7 +84,7 @@ static	int	raycast_loop(t_scene *scene, t_player *plr, t_ray *ray)
 				ray->map_y += ray->step_y;
 				ray->side = 1;
 			}
-			if (scene->map[ray->map_x][ray->map_y] == 1)
+			if (scene->map && scene->map[ray->map_x] && scene->map[ray->map_x][ray->map_y] == '1')
 				ray->hit = 1;
 		}
 		if (ray->side == 0)

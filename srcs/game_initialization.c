@@ -60,11 +60,12 @@ int	init_game(t_game *game, int ac, char **av)
 {
 	if (ac != 2)
 		return (0);
+	game = malloc(sizeof(t_game));
+	game->mlx = malloc(sizeof(t_mlx));
 	game->scene = parsing_main(av);
 	set_starting_pos(game);
 	if (!game->scene)
 		return (0);
-	set_starting_pos(game);
 	init_mlx(game->scene, game->mlx);
 	return (1);
 }
