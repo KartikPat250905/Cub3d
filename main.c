@@ -14,11 +14,10 @@ int	is_wall(t_data *data, int x, int y)
 {
 	int map_x = (int)(x / TILE_SIZE);
 	int map_y = (int)(y / TILE_SIZE);
-
 	if (map_y >= 0 && data->scene->map[map_y] != NULL)
 	{
 		int map_width = strlen(data->scene->map[map_y]);
-		if (map_x >= 0 && map_x < map_width)
+		if (map_x >= 0 && map_x < (map_width - 1))
 		{
 			if (data->scene->map[map_y][map_x] == '1')
 				return 1;
@@ -31,19 +30,17 @@ float	main_dda(t_data *data, t_dda *vars)
 {
 	while (1)
 	{
-		vars->distance_hor = distance_calc(vars->hor_xn, vars->hor_yn,
-				vars->hor_xn + vars->hor_step_x, vars->hor_yn + vars->hor_step_y);
 		vars->hor_xn += vars->hor_step_x;
 		vars->hor_yn += vars->hor_step_y;
 		if (is_wall(data, vars->hor_xn, vars->hor_yn))
 			break ;
-		vars->distance_vert = distance_calc(vars->vert_xn, vars->vert_yn,
-				vars->vert_xn + vars->vert_step_x, vars->vert_yn + vars->vert_step_y);
 		vars->vert_xn += vars->vert_step_x;
 		vars->vert_yn += vars->vert_step_y;
 		if (is_wall(data, vars->vert_xn, vars->vert_yn))
 			break ;
 	}
+	vars->distance_hor = distance_calc(data->player.x, data->player.y, vars->hor_xn, vars->hor_yn);
+	vars->distance_vert = distance_calc(data->player.x, data->player.y, vars->vert_xn, vars->vert_yn);
 	if (vars->distance_hor > vars->distance_vert)
 		return (vars->distance_vert);
 	return (vars->distance_hor);
@@ -64,32 +61,43 @@ float	dda(t_data *data, float angle)
 		vars.hor_step_y *= -1;
 	if ((angle > PI_2 && angle < 3 * PI_2))
 		vars.hor_step_x *= -1;
+	if (angle == 0 || angle == PI)
+	{
+		vars.hor_step_x = 0;
+		vars.hor_step_y = 0;
+	}
+
 	vars.vert_step_x = TILE_SIZE;
 	vars.vert_step_y = vars.vert_step_x * tan(angle);
 	if ((angle > PI_2 && angle < 3 * PI_2))
 		vars.vert_step_x *= -1;
 	if (angle > PI)
 		vars.vert_step_y *= -1;
+	if (angle == PI_2 || angle == 3 * PI_2)
+	{
+		vars.vert_step_y = TILE_SIZE * (angle > PI ? -1 : 1);
+		vars.vert_step_x = 0;
+	}
+
+	//horizontal initial points
 	if (angle < PI)
 		vars.hor_yn = floor(data->player.y / TILE_SIZE) * TILE_SIZE;
 	else if (angle > PI)
 		vars.hor_yn = ceil(data->player.y / TILE_SIZE) * TILE_SIZE;
 	if (angle != 0 && angle != PI)
-		vars.hor_xn = fabs(vars.hor_yn - data->player.y) / tan(angle);
+		vars.hor_xn = data->player.x + ((vars.hor_yn - data->player.y) / tan(angle));
 	else
 		vars.hor_xn = 0;
 
+	//vertical initial points
 	if ((angle > PI_2 && angle < 3 * PI_2))
 		vars.vert_xn = floor(data->player.x / TILE_SIZE) * TILE_SIZE;
 	else
 		vars.vert_xn = ceil(data->player.x / TILE_SIZE) * TILE_SIZE;
 	if (angle != PI_2 && angle != 3 * PI_2)
-		vars.vert_yn = fabs(vars.vert_xn - data->player.x) * tan(angle);
+		vars.vert_yn = data->player.y + ((vars.vert_xn - data->player.x) * tan(angle));
 	else
 		vars.vert_yn = 0;
-
-	vars.distance_hor = distance_calc(data->player.x, data->player.y, vars.hor_xn, vars.hor_yn);
-	vars.distance_vert = distance_calc(data->player.x, data->player.y, vars.vert_xn, vars.vert_yn);
 	return (main_dda(data, &vars));
 }
 
@@ -102,9 +110,8 @@ void	render_col(t_data *data, int x, float distance, int color)
 	int	wall_height;
 	int	y;
 
-	wall_height = (TILE_SIZE / distance) * 150;
-	if (distance > MAX_DISTANCE)
-		wall_height = 0;
+	printf("The distance i am getting is %f\n", distance);
+	wall_height = (TILE_SIZE * WIN_HEIGHT) / (distance * FOV);
 	wall_top = (WIN_HEIGHT / 2) - (wall_height / 2);
 	wall_bottom = (WIN_HEIGHT / 2) + (wall_height / 2);
 	if (wall_top < 0)
@@ -112,14 +119,14 @@ void	render_col(t_data *data, int x, float distance, int color)
 	if (wall_bottom >= WIN_HEIGHT)
 		wall_bottom = WIN_HEIGHT - 1;
 	y = wall_top;
-	while (y <= wall_bottom)
+	while (y < wall_bottom)
 		mlx_put_pixel(data->img, x, y++, color);
 }
 
 void	render(t_data *data)
 {
 	float ray_distance;
-	float ray_angle = data->player.angle - 30 * (PI / 180);
+	float ray_angle = data->player.angle - (30 * (PI / 180));
 	float step = FOV / WIN_WIDTH;
 	for (int x = 0; x < WIN_WIDTH; ++x)
 	{
@@ -128,8 +135,6 @@ void	render(t_data *data)
 		if (ray_angle > 2 * PI)
 			ray_angle -= 2 * PI;
 		ray_distance = dda(data, ray_angle);
-		printf("The ray_distance is %f for the angle %f\n",ray_distance,ray_angle);
-
 		double corrected_distance = ray_distance * cos(ray_angle - data->player.angle);
 				ray_angle += step;
 		render_col(data, x, corrected_distance, ft_pixel(255, 0, 0, 255));

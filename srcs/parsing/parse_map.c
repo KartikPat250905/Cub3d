@@ -44,7 +44,7 @@ void	check_borders(t_scene *scene, int index, int len)
 	i = 0;
 	while (file[index][i])
 	{
-		if (file[index][i] != '1')
+		if (file[index][i] != '1' && file[index][i] != ' ')
 			perror_and_exit(scene, "The given map is not closed", 1);
 		change_space(file, index, i, 1);
 		i++;
@@ -60,7 +60,7 @@ void	check_borders(t_scene *scene, int index, int len)
 	i = index;
 	while (file[i] && file[i][0])
 	{
-		if (file[i][0] != '1')
+		if (file[i][0] != '1' && file[i][0] != ' ')
 			perror_and_exit(scene, "The given map is not closed", 1);
 		change_space(file, i, 0, 1);
 		i++;
@@ -68,7 +68,7 @@ void	check_borders(t_scene *scene, int index, int len)
 	i = index;
 	while (file[i] && file[i][ft_strlen(file[i]) - 1])
 	{
-		if (file[i][ft_strlen(file[i]) - 1] != '1')
+		if (file[i][ft_strlen(file[i]) - 1] != '1' && file[i][ft_strlen(file[i]) - 1] != ' ')
 			perror_and_exit(scene, "The given map is not closed", 1);
 		change_space(file, i, ft_strlen(file[i]) - 1, 1);
 		i++;
