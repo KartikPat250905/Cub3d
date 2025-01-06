@@ -95,7 +95,6 @@ int	main(int ac, char **av)
 {
 	t_game	game;
 
-	// check ac in parsing
 	if (!init_game(&game, ac, av))
 		return (1);
 	return(raycast_loop(game.scene, &game.plr, &game.ray));
