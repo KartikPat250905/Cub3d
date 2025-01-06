@@ -60,11 +60,57 @@ static void	update_values(t_player *plr, t_ray *ray, int x)
 	calculate_step_and_dist(plr, ray);
 }
 
-static	int	raycast_loop(t_scene *scene, t_player *plr, t_ray *ray)
+static void	draw_column(t_game *game, int x)
+{
+	int	line_height;
+	int	draw_start;
+	int	draw_end;
+	int	color;
+
+
+	line_height = (int)(SCREEN_H / game->ray.p_dist);
+	//printf("line height: %d\n", line_height);
+	draw_start = -line_height / 2 + SCREEN_H / 3;
+	if (draw_start < 0)
+		draw_start = 0;
+	draw_end = line_height / 2 + SCREEN_H / 2;
+	if (draw_end < SCREEN_H)
+		draw_end = SCREEN_H - 1;
+	color = 0xFF0000FF;
+	printf("draw_start : %d, draw_end : %d\n", draw_start, draw_end);
+	while (draw_start < draw_end)
+	{
+		//printf("Putting pixel x:%d y:%d\n", x, draw_start);
+		mlx_put_pixel(game->mlx->img, x, draw_start, color);
+		draw_start++;
+	}
+}
+
+void	background_color(t_mlx *mlx, unsigned int color)
+{
+	uint32_t	y;
+	uint32_t	x;
+
+	y = 0;
+	x = 0;
+	while (y < mlx -> img -> height)
+	{
+		x = 0;
+		while (x < mlx -> img -> width)
+		{
+			mlx_put_pixel(mlx -> img, x, y, color);
+			x++;
+		}
+		y++;
+	}
+}
+
+static	int	raycast_loop(t_game *game, t_scene *scene, t_player *plr, t_ray *ray)
 {
 	int	x;
 
 	x = -1;
+	background_color(game->mlx, 0x0000FFFF);
 	// Goes through every vertical stripe of the screen
 	while (++x < SCREEN_W)
 	{
@@ -91,8 +137,19 @@ static	int	raycast_loop(t_scene *scene, t_player *plr, t_ray *ray)
 			ray->p_dist = ray->s_dist_x - ray->d_dist_x;
 		else
 			ray->p_dist = ray->s_dist_y - ray->d_dist_y;
+		draw_column(game, x);
 	}
+	if (mlx_image_to_window(game->mlx->mlx, game->mlx->img, 0, 0) < 0)
+		exit (1);
 	return (0);
+}
+
+static void game_loop(void *ptr)
+{
+	t_game *game;
+
+	game = (t_game *)ptr;
+	raycast_loop(game, game->scene, &game->plr, &game->ray);
 }
 
 int	main(int ac, char **av)
@@ -102,6 +159,7 @@ int	main(int ac, char **av)
 	game = malloc(sizeof(t_game));
 	if (!init_game(game, ac, av))
 		return (1);
-	printf("In main posx = %f, posy = %f\n", game->plr.pos_x, game->plr.pos_y);
-	return(raycast_loop(game->scene, &game->plr, &game->ray));
+	mlx_loop_hook(game->mlx->mlx, game_loop, (void *)game);
+	mlx_loop(game->mlx->mlx);
+	return (0);
 }

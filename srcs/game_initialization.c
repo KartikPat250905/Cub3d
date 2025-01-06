@@ -21,23 +21,31 @@ static void	set_angle(t_game *game, char dir)
 {
 	if (dir == 'N')
 	{
-		game->plr.dir_x = game->plr.dir_x;
-		game->plr.dir_y = game->plr.dir_x + 3;
+		game->plr.dir_x = 0;
+		game->plr.dir_y = -1;
+		game->plr.pln_x = 0.66;
+		game->plr.pln_y = 0;
 	}
 	else if (dir == 'S')
 	{
-		game->plr.dir_x = game->plr.dir_x;
-		game->plr.dir_y = game->plr.dir_x - 3;
+		game->plr.dir_x = 0;
+		game->plr.dir_y = 1;
+		game->plr.pln_x = -0.66;
+		game->plr.pln_y = 0;
 	}
 	else if (dir == 'W')
 	{
-		game->plr.dir_x = game->plr.dir_x + 3;
-		game->plr.dir_y = game->plr.dir_x;
+		game->plr.dir_x = 1;
+		game->plr.dir_y = 0;
+		game->plr.pln_x = 0;
+		game->plr.pln_y = 0.66;
 	}
 	else if (dir == 'E')
 	{
-		game->plr.dir_x = game->plr.dir_x - 3;
-		game->plr.dir_y = game->plr.dir_x;
+		game->plr.dir_x = -1;
+		game->plr.dir_y = 0;
+		game->plr.pln_x = 0;
+		game->plr.pln_y = -0.66;
 	}
 }
 
@@ -91,6 +99,8 @@ int	init_game(t_game *game, int ac, char **av)
 	game->mlx = malloc(sizeof(t_mlx));
 	game->scene = parsing_main(av);
 	game->plr = *set_starting_pos(game);
+	game->plr.pln_x = 0;
+	game->plr.pln_x = 0;
 	if (!game->scene)
 		return (0);
 	init_mlx(game->scene, game->mlx);
