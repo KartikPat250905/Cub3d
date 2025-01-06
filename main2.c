@@ -2,6 +2,7 @@
 
 static void	calculate_step_and_dist(t_player *plr, t_ray *ray)
 {
+	// Calculates direction of movement for next wall
 	if (ray->dir_x < 0)
 	{
 		ray->step_x = -1;
@@ -39,15 +40,18 @@ static void	update_values(t_player *plr, t_ray *ray, int x)
 	ray->map_x = (int)plr->pos_x;
 	ray->map_x = (int)plr->pos_y;
 
-	// Distance until next grid side
+	// Distance until next vertical grid side
 	if (ray->dir_x == 0)
 		ray->d_dist_x = 1e30;
 	else
 		ray->d_dist_x = 1 / ray->dir_x;
+	// Distance until next horizontal grid side
 	if (ray->dir_y == 0)
 		ray->d_dist_y = 1e30;
 	else
 		ray->d_dist_y = 1 / ray->dir_y;
+
+	// Get the absolute value for distance
 	if (ray->d_dist_x < 0)
 		ray->d_dist_x *= (-1);
 	if (ray->d_dist_y < 0)
@@ -61,7 +65,7 @@ static	int	raycast_loop(t_scene *scene, t_player *plr, t_ray *ray)
 	int	x;
 
 	x = -1;
-	// Goes through every vertical stripe (?)
+	// Goes through every vertical stripe of the screen
 	while (++x < SCREEN_W)
 	{
 		update_values(plr, ray, x);

@@ -2,7 +2,7 @@
 
 static void	init_mlx(t_scene *scene, t_mlx *mlx)
 {
-	mlx->mlx = mlx_init(SCREEN_W, SCREEN_H, "cub3d", true);
+	mlx->mlx = mlx_init(SCREEN_W, SCREEN_H, "cub3d", false);
 	if (!mlx)
 	{
 		free_and_exit(scene, EXIT_FAILURE);
@@ -44,8 +44,9 @@ static void	set_starting_pos(t_game *game)
 			ch = game->scene->map[x][y];
 			if (ch == 'N' || ch == 'S' || ch == 'E' || ch == 'W')
 			{
-				game->plr.pos_x = (float)x * TILE_SIZE;
-				game->plr.pos_y = (float)y * TILE_SIZE;
+				printf("posx = %f, posy = %f\n", (float)x, (float)y);
+				game->plr.pos_x = (float)x;
+				game->plr.pos_y = (float)y;
 				get_angle(game, ch);
 				break ;
 			}
