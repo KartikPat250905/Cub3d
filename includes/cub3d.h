@@ -77,6 +77,8 @@ typedef struct s_player
 	float	pln_x;
 	float	pln_y;
 
+	// The angle player is looking to in radians reletive to the x axis
+	float	angle;
 }	t_player;
 
 typedef struct s_game
@@ -101,9 +103,13 @@ typedef enum	e_type
 
 // -- MACROS --
 
+# define PI 3.14159265358979323846
+# define FOV PI/3
+# define PI_2 PI/2
 # define SCREEN_W 1280
 # define SCREEN_H 1024
 # define SPEED 5
+# define TILE_SIZE 64
 
 // -- FUNCTION PROTOTYPES --
 
