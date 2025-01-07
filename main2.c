@@ -1,51 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main2.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/07 13:46:11 by motuomin          #+#    #+#             */
+/*   Updated: 2025/01/07 13:46:20 by motuomin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "includes/cub3d.h"
-
-static void	draw_column(t_game *game, int x)
-{
-	int	line_height;
-	int	draw_start;
-	int	draw_end;
-	int	color1;
-	int	color2;
-
-
-	line_height = (int)(SCREEN_H / game->ray.p_dist);
-	draw_start = -line_height / 2 + SCREEN_H / 3;
-	if (draw_start < 0)
-		draw_start = 0;
-	draw_end = line_height / 2 + SCREEN_H / 2;
-	if (draw_end > SCREEN_H)
-		draw_end = SCREEN_H - 1;
-	color1 = 0xFF0000FF;
-	color2 = 0x00000FF;
-	while (draw_start < draw_end)
-	{
-		if (game->ray.side == 1)
-			mlx_put_pixel(game->mlx->img, x, draw_start, color1);
-		else
-			mlx_put_pixel(game->mlx->img, x, draw_start, color2);
-		draw_start++;
-	}
-}
-
-void	background_color(t_mlx *mlx, unsigned int color)
-{
-	uint32_t	y;
-	uint32_t	x;
-
-	y = 0;
-	x = 0;
-	while (y < mlx -> img -> height)
-	{
-		x = 0;
-		while (x < mlx -> img -> width)
-		{
-			mlx_put_pixel(mlx -> img, x, y, color);
-			x++;
-		}
-		y++;
-	}
-}
 
 static void	calculate_step_and_dist(t_player *plr, t_ray *ray)
 {
@@ -129,6 +94,7 @@ static	int	raycast_loop(t_game *game, t_scene *scene, t_player *plr, t_ray *ray)
 				ray->side = 1;
 			}
 			if (scene->map && scene->map[ray->map_y]
+				&& scene->map[ray->map_y][ray->map_x]
 				&& scene->map[ray->map_y][ray->map_x] == '1')
 				ray->hit = 1;
 		}

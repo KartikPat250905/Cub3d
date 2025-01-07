@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   movement.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/07 13:35:56 by motuomin          #+#    #+#             */
+/*   Updated: 2025/01/07 13:37:30 by motuomin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 void	print_map(char **map)
@@ -57,25 +69,25 @@ void	move(t_scene *s, t_player *p, t_dir dir)
 	move_plr(move_x, move_y, p, s);
 }
 
-void	rotate(t_scene *s, t_player *p, t_dir dir)
+void	rotate(t_player *p, t_dir dir)
 {
 	float	old_dir_x;
 	float	old_pln_x;
 
 	old_dir_x = p->dir_x;
 	old_pln_x = p->pln_x;
-	if (dir == RIGHT)
+	if (dir == LEFT)
 	{
-		p->dir_x = p->dir_x * cos(-SPEED) - p->dir_y * sin(-SPEED);
-		p->dir_y = old_dir_x * sin(-SPEED) + p->dir_y * cos(-SPEED);
-		p->pln_x = p->pln_x * cos(-SPEED) - p->pln_y * sin(-SPEED);
-		p->pln_y = old_pln_x * sin(-SPEED) + p->pln_y * cos(-SPEED);
+		p->dir_x = p->dir_x * cos(-R_SPEED) - p->dir_y * sin(-R_SPEED);
+		p->dir_y = old_dir_x * sin(-R_SPEED) + p->dir_y * cos(-R_SPEED);
+		p->pln_x = p->pln_x * cos(-R_SPEED) - p->pln_y * sin(-R_SPEED);
+		p->pln_y = old_pln_x * sin(-R_SPEED) + p->pln_y * cos(-R_SPEED);
 	}
 	else
 	{
-		p->dir_x = p->dir_x * cos(SPEED) - p->dir_y * sin(SPEED);
-		p->dir_y = old_dir_x * sin(SPEED) + p->dir_y * cos(SPEED);
-		p->pln_x = p->pln_x * cos(SPEED) - p->pln_y * sin(SPEED);
-		p->pln_y = old_pln_x * sin(SPEED) + p->pln_y * cos(SPEED);
+		p->dir_x = p->dir_x * cos(R_SPEED) - p->dir_y * sin(R_SPEED);
+		p->dir_y = old_dir_x * sin(R_SPEED) + p->dir_y * cos(R_SPEED);
+		p->pln_x = p->pln_x * cos(R_SPEED) - p->pln_y * sin(R_SPEED);
+		p->pln_y = old_pln_x * sin(R_SPEED) + p->pln_y * cos(R_SPEED);
 	}
 }

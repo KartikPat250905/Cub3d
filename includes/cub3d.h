@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/07 13:46:15 by motuomin          #+#    #+#             */
+/*   Updated: 2025/01/07 14:31:02 by motuomin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -33,6 +45,10 @@ typedef struct s_mlx
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
+	mlx_image_t	*t_n;
+	mlx_image_t	*t_s;
+	mlx_image_t	*t_e;
+	mlx_image_t	*t_w;
 	t_scene	s;
 }			t_mlx;
 
@@ -112,22 +128,39 @@ typedef enum	e_type
 
 // -- MACROS --
 
-# define PI 3.14159265358979323846
-# define FOV PI/3
-# define PI_2 PI/2
-# define SCREEN_W 700
-# define SCREEN_H 500
-# define SPEED 1
-# define TILE_SIZE 64
+# define PI			3.14159265358979323846
+# define FOV		PI/3
+# define PI_2		PI/2
+# define SCREEN_W	700
+# define SCREEN_H	500
+# define SPEED		1
+# define R_SPEED	0.5
+# define TILE_SIZE	64
+
+// COLORS
+//					0xRRGGBBAA
+# define RED		0xFF0000FF
+# define BLUE		0x0000FFFF
+# define GREEN		0x00FF00FF
+# define BLACK		0x000000FF
+# define WHITE		0xFFFFFFFF
+# define GRAY		0xFFFFFF00
 
 // -- FUNCTION PROTOTYPES --
 
-//	game_initialization.c
-int	init_game(t_game *game, int ac, char **av);
+//		game_initialization.c
+int		init_game(t_game *game, int ac, char **av);
 
+//		srcs/draw_utils.c
+void	background_color(t_mlx *mlx, unsigned int color);
+void	draw_column(t_game *game, int x);
+
+//		srcs/key_hook.c
 void	key_hook(mlx_key_data_t keydata, void *param);
+
+//		srcs/movement.c
 void	move(t_scene *s, t_player *p, t_dir dir);
-void	rotate(t_scene *s, t_player *p, t_dir dir);
+void	rotate(t_player *p, t_dir dir);
 
 // ?
 int		compress_file(t_scene *scene, char *file);
@@ -135,5 +168,7 @@ int		get_line(char **line, int fd);
 t_scene	*parsing_main(char **argv);
 void	trim_spaces(char **line);
 void	perror_and_exit(t_scene *scene, char *str, int exit);
+
+
 
 #endif
