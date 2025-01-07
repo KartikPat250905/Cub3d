@@ -55,7 +55,7 @@ void	draw_column(t_game *game, int x)
 	int	draw_end;
 
 	line_height = (int)(SCREEN_H / game->ray.p_dist);
-	draw_start = -line_height / 2 + SCREEN_H / 3;
+	draw_start = -line_height / 2 + SCREEN_H / 2;
 	if (draw_start < 0)
 		draw_start = 0;
 	draw_end = line_height / 2 + SCREEN_H / 2;
