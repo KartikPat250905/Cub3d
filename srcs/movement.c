@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
 void	print_map(char **map)
 {
@@ -64,18 +64,18 @@ void	rotate(t_scene *s, t_player *p, t_dir dir)
 
 	old_dir_x = p->dir_x;
 	old_pln_x = p->pln_x;
-	if (dir == LEFT)
+	if (dir == RIGHT)
 	{
-		p->dir_x = p->dir_x * cos(-SPEED) - p->dir_y * sin(SPEED);
-		p->dir_y = old_dir_x * sin(-SPEED) + p->dir_y + cos(SPEED);
-		p->pln_x = p->pln_x * cos(-SPEED) - p->pln_y * sin(SPEED);
-		p->pln_y = old_pln_x * sin(-SPEED) + p->dir_y + cos(SPEED);
+		p->dir_x = p->dir_x * cos(-SPEED) - p->dir_y * sin(-SPEED);
+		p->dir_y = old_dir_x * sin(-SPEED) + p->dir_y * cos(-SPEED);
+		p->pln_x = p->pln_x * cos(-SPEED) - p->pln_y * sin(-SPEED);
+		p->pln_y = old_pln_x * sin(-SPEED) + p->pln_y * cos(-SPEED);
 	}
 	else
 	{
 		p->dir_x = p->dir_x * cos(SPEED) - p->dir_y * sin(SPEED);
-		p->dir_y = old_dir_x * sin(SPEED) + p->dir_y + cos(SPEED);
+		p->dir_y = old_dir_x * sin(SPEED) + p->dir_y * cos(SPEED);
 		p->pln_x = p->pln_x * cos(SPEED) - p->pln_y * sin(SPEED);
-		p->pln_y = old_pln_x * sin(SPEED) + p->dir_y + cos(SPEED);
+		p->pln_y = old_pln_x * sin(SPEED) + p->pln_y * cos(SPEED);
 	}
 }
