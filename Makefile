@@ -2,6 +2,7 @@ NAME = cub3D
 CC = cc
 INCLUDES = -Iincludes -I $(MLX)/include
 CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
+#CFLAGS = -g
 LIBFT = ./libft
 
 # MLX
@@ -20,6 +21,9 @@ SOURCES = srcs/parsing/parsing.c \
 		  srcs/free/error.c \
 		  main2.c \
 		  srcs/game_initialization.c \
+		  srcs/key_hook.c \
+		  srcs/movement.c \
+		  srcs/drawing_utils.c
 
 OBJECTS = $(SOURCES:.c=.o)
 

@@ -1,8 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main2.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/07 13:46:11 by motuomin          #+#    #+#             */
+/*   Updated: 2025/01/07 13:46:20 by motuomin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "includes/cub3d.h"
 
 static void	calculate_step_and_dist(t_player *plr, t_ray *ray)
 {
-	// Calculates direction of movement for next wall
 	if (ray->dir_x < 0)
 	{
 		ray->step_x = -1;
@@ -44,13 +55,12 @@ static void	update_values(t_player *plr, t_ray *ray, int x)
 	if (ray->dir_x == 0)
 		ray->d_dist_x = 1e30;
 	else
-		ray->d_dist_x = 1 / ray->dir_x;
+		ray->d_dist_x = sqrt(1 + (ray->dir_y * ray->dir_y) / (ray->dir_x * ray->dir_x));
 	// Distance until next horizontal grid side
 	if (ray->dir_y == 0)
 		ray->d_dist_y = 1e30;
 	else
-		ray->d_dist_y = 1 / ray->dir_y;
-
+		ray->d_dist_y = sqrt(1 + (ray->dir_x * ray->dir_x) / (ray->dir_y * ray->dir_y));
 	// Get the absolute value for distance
 	if (ray->d_dist_x < 0)
 		ray->d_dist_x *= (-1);
@@ -60,18 +70,17 @@ static void	update_values(t_player *plr, t_ray *ray, int x)
 	calculate_step_and_dist(plr, ray);
 }
 
-static	int	raycast_loop(t_scene *scene, t_player *plr, t_ray *ray)
+static	int	raycast_loop(t_game *game, t_scene *scene, t_player *plr, t_ray *ray)
 {
 	int	x;
 
 	x = -1;
-	// Goes through every vertical stripe of the screen
+	background_color(game->mlx, 0x0000FFFF);
 	while (++x < SCREEN_W)
 	{
 		update_values(plr, ray, x);
 		while (!ray->hit) // What if no hit?
 		{
-			// Jump to next square
 			if (ray->s_dist_x < ray->s_dist_y)
 			{
 				ray->s_dist_x += ray->d_dist_x;
@@ -84,15 +93,28 @@ static	int	raycast_loop(t_scene *scene, t_player *plr, t_ray *ray)
 				ray->map_y += ray->step_y;
 				ray->side = 1;
 			}
-			if (scene->map && scene->map[ray->map_x] && scene->map[ray->map_x][ray->map_y] == '1')
+			if (scene->map && scene->map[ray->map_y]
+				&& scene->map[ray->map_y][ray->map_x]
+				&& scene->map[ray->map_y][ray->map_x] == '1')
 				ray->hit = 1;
 		}
 		if (ray->side == 0)
 			ray->p_dist = ray->s_dist_x - ray->d_dist_x;
 		else
 			ray->p_dist = ray->s_dist_y - ray->d_dist_y;
+		draw_column(game, x);
 	}
+	if (mlx_image_to_window(game->mlx->mlx, game->mlx->img, 0, 0) < 0)
+		exit (1);
 	return (0);
+}
+
+static void game_loop(void *ptr)
+{
+	t_game *game;
+
+	game = (t_game *)ptr;
+	raycast_loop(game, game->scene, game->plr, &game->ray);
 }
 
 int	main(int ac, char **av)
@@ -102,6 +124,8 @@ int	main(int ac, char **av)
 	game = malloc(sizeof(t_game));
 	if (!init_game(game, ac, av))
 		return (1);
-	printf("In main posx = %f, posy = %f\n", game->plr.pos_x, game->plr.pos_y);
-	return(raycast_loop(game->scene, &game->plr, &game->ray));
+	mlx_loop_hook(game->mlx->mlx, game_loop, (void *)game);
+	mlx_key_hook(game->mlx->mlx, key_hook, (void *)game);
+	mlx_loop(game->mlx->mlx);
+	return (0);
 }
