@@ -127,6 +127,7 @@ int	init_game(t_game *game, int ac, char **av);
 
 void	key_hook(mlx_key_data_t keydata, void *param);
 void	move(t_scene *s, t_player *p, t_dir dir);
+void	rotate(t_scene *s, t_player *p, t_dir dir);
 
 // ?
 int		compress_file(t_scene *scene, char *file);

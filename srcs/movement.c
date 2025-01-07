@@ -34,7 +34,7 @@ void	move(t_scene *s, t_player *p, t_dir dir)
 	float move_x;
 	float move_y;
 
-	if (dir == UP || dir == DOWN
+	if (dir == UP || dir == DOWN)
 	{
 		move_x = p->dir_x;
 		move_y = p->dir_y;
@@ -55,4 +55,27 @@ void	move(t_scene *s, t_player *p, t_dir dir)
 		move_y *= SPEED;
 	}
 	move_plr(move_x, move_y, p, s);
+}
+
+void	rotate(t_scene *s, t_player *p, t_dir dir)
+{
+	float	old_dir_x;
+	float	old_pln_x;
+
+	old_dir_x = p->dir_x;
+	old_pln_x = p->pln_x;
+	if (dir == LEFT)
+	{
+		p->dir_x = p->dir_x * cos(-SPEED) - p->dir_y * sin(SPEED);
+		p->dir_y = old_dir_x * sin(-SPEED) + p->dir_y + cos(SPEED);
+		p->pln_x = p->pln_x * cos(-SPEED) - p->pln_y * sin(SPEED);
+		p->pln_y = old_pln_x * sin(-SPEED) + p->dir_y + cos(SPEED);
+	}
+	else
+	{
+		p->dir_x = p->dir_x * cos(SPEED) - p->dir_y * sin(SPEED);
+		p->dir_y = old_dir_x * sin(SPEED) + p->dir_y + cos(SPEED);
+		p->pln_x = p->pln_x * cos(SPEED) - p->pln_y * sin(SPEED);
+		p->pln_y = old_pln_x * sin(SPEED) + p->dir_y + cos(SPEED);
+	}
 }
