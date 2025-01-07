@@ -23,14 +23,14 @@ static void	set_angle(t_player *plr, char dir)
 	{
 		plr->dir_x = 0;
 		plr->dir_y = -1;
-		plr->pln_x = 2;
+		plr->pln_x = 1;
 		plr->pln_y = 0;
 	}
 	else if (dir == 'S')
 	{
 		plr->dir_x = 0;
 		plr->dir_y = 1;
-		plr->pln_x = -2;
+		plr->pln_x = -1;
 		plr->pln_y = 0;
 	}
 	else if (dir == 'W')
@@ -38,14 +38,14 @@ static void	set_angle(t_player *plr, char dir)
 		plr->dir_x = -1;
 		plr->dir_y = 0;
 		plr->pln_x = 0;
-		plr->pln_y = -2;
+		plr->pln_y = -1; // 2
 	}
 	else if (dir == 'E')
 	{
 		plr->dir_x = 1;
 		plr->dir_y = 0;
 		plr->pln_x = 0;
-		plr->pln_y = 2;
+		plr->pln_y = 1;
 	}
 }
 
@@ -78,7 +78,6 @@ static t_player	*set_starting_pos(t_game *game)
 			ch = game->scene->map[x][y];
 			if (ch == 'N' || ch == 'S' || ch == 'E' || ch == 'W')
 			{
-				printf("posx = %f, posy = %f\n", (float)x, (float)y);
 				player->pos_x = (float)y;
 				player->pos_y = (float)x;
 				get_angle(ch, player);

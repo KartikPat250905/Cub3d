@@ -2,26 +2,26 @@
 
 void	key_hook(mlx_key_data_t keydata, void *param)
 {
-	t_mlx	*mlx;
+	t_game	*game;
 
-	mlx = (t_mlx *)param->mlx;
+	game = (t_game *)param;
+
 	// ESC to escape
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-		free_and_exit(param->screen, EXIT_SUCCESS);
+		free_and_exit(game->scene, EXIT_SUCCESS);
 	
 	// WASD to move
 	else if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
-		move(mlx, UP);
+		move(game->scene, game->plr, UP);
 	else if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
-		move(mlx, DOWN);
+		move(game->scene, game->plr, DOWN);
 	else if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
-		move(mlx, LEFT);
+		move(game->scene, game->plr, LEFT);
 	else if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
-		move(mlx, RIGHT);
+		move(game->scene, game->plr, RIGHT);
 
 	else if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
 		return ;
 	else if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS)
 		return ;
-	// draw_image(mlx);
 }

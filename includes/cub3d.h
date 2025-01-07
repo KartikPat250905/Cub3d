@@ -20,6 +20,15 @@
 
 // -- TYPEDEFS --
 
+typedef enum e_dir
+{
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT
+}	t_dir;
+
+
 typedef struct s_mlx
 {
 	mlx_t		*mlx;
@@ -106,15 +115,18 @@ typedef enum	e_type
 # define PI 3.14159265358979323846
 # define FOV PI/3
 # define PI_2 PI/2
-# define SCREEN_W 1280
-# define SCREEN_H 1024
-# define SPEED 5
+# define SCREEN_W 700
+# define SCREEN_H 500
+# define SPEED 1
 # define TILE_SIZE 64
 
 // -- FUNCTION PROTOTYPES --
 
 //	game_initialization.c
 int	init_game(t_game *game, int ac, char **av);
+
+void	key_hook(mlx_key_data_t keydata, void *param);
+void	move(t_scene *s, t_player *p, t_dir dir);
 
 // ?
 int		compress_file(t_scene *scene, char *file);
