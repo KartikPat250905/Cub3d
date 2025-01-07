@@ -1,6 +1,5 @@
 #include "includes/cub3d.h"
 
-
 static void	draw_column(t_game *game, int x)
 {
 	int	line_height;
@@ -104,18 +103,8 @@ static void	update_values(t_player *plr, t_ray *ray, int x)
 		ray->d_dist_y *= (-1);
 
 	calculate_step_and_dist(plr, ray);
-	
-	/*
-	printf("---\n");
-	printf("ray map_x : %d\n", ray->map_x);
-	printf("ray map_y : %d\n", ray->map_y);
-	printf("plr_x = %f\n", plr->pos_x);
-	printf("plr_y = %f\n", plr->pos_y);
-	printf("plr dir_x = %f\n", plr->dir_x);
-	printf("plr dir_y = %f\n", plr->dir_y);
-	printf("ray dir_x = %f\n", ray->dir_x);
-	printf("ray dir_y = %f\n", ray->dir_y);*/
 }
+
 static	int	raycast_loop(t_game *game, t_scene *scene, t_player *plr, t_ray *ray)
 {
 	int	x;
@@ -139,16 +128,9 @@ static	int	raycast_loop(t_game *game, t_scene *scene, t_player *plr, t_ray *ray)
 				ray->map_y += ray->step_y;
 				ray->side = 1;
 			}
-			if (scene->map && scene->map[ray->map_x] && scene->map[ray->map_x][ray->map_y] == '1')
-			if (scene->map && scene->map[ray->map_x] && scene->map[ray->map_x][ray->map_y] == '1')
-			{
-				printf("A wall was hit!\n");
-				printf("x : %d, y : %d\n", ray->map_x, ray->map_y);
-				printf("Map location char : %c\n", scene->map[ray->map_x][ray->map_y]);
-				printf("ray->s_dist_x : %f, ray->s_dist_y : %f\n", ray->s_dist_x, ray->s_dist_y);
-				printf("ray->d_dist_x : %f, ray->d_dist_y : %f\n", ray->d_dist_x, ray->d_dist_y);
+			if (scene->map && scene->map[ray->map_y]
+				&& scene->map[ray->map_y][ray->map_x] == '1')
 				ray->hit = 1;
-			}
 		}
 		if (ray->side == 0)
 			ray->p_dist = ray->s_dist_x - ray->d_dist_x;
