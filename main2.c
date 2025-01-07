@@ -75,7 +75,6 @@ static	int	raycast_loop(t_game *game, t_scene *scene, t_player *plr, t_ray *ray)
 	int	x;
 
 	x = -1;
-	background_color(game->mlx, 0x0000FFFF);
 	while (++x < SCREEN_W)
 	{
 		update_values(plr, ray, x);
@@ -124,6 +123,8 @@ int	main(int ac, char **av)
 	game = malloc(sizeof(t_game));
 	if (!init_game(game, ac, av))
 		return (1);
+	printf("The floor R=%d G=%d and B=%d\n", game->scene -> floor_color[0], game->scene->floor_color[1],game->scene->floor_color[2]);
+	printf("The cieling R=%d G=%d and B=%d\n", game->scene -> cieling_color[0], game->scene->cieling_color[1],game->scene->cieling_color[2]);
 	mlx_loop_hook(game->mlx->mlx, game_loop, (void *)game);
 	mlx_key_hook(game->mlx->mlx, key_hook, (void *)game);
 	mlx_loop(game->mlx->mlx);

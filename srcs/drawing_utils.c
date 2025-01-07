@@ -31,21 +31,55 @@ void	background_color(t_mlx *mlx, unsigned int color)
 	}
 }
 
-static void	draw_ceiling(t_game *game, int x, int draw_start)
+int rgb_to_int(int r, int g, int b)
 {
-	int	i;
+	if (r < 0) r = 0;
+	if (r > 255) r = 255;
+	if (g < 0) g = 0;
+	if (g > 255) g = 255;
+	if (b < 0) b = 0;
+	if (b > 255) b = 255;
 
-	i = 0;
-	while (i < draw_start)
-			mlx_put_pixel(game->mlx->img, x, i++, BLUE);
-			//mlx_put_pixel(game->mlx->img, x, i++, *game->scene->cieling_color);
+	return (r << 16) | (g << 8) | b;
 }
 
-static void	draw_floor(t_game *game, int x, int y)
+
+static void draw_ceiling(t_game *game, int x, int draw_start)
 {
-	while (y < SCREEN_H - 1)
-			mlx_put_pixel(game->mlx->img, x, y++, GRAY);
-			//mlx_put_pixel(game->mlx->img, x, y++, *game->scene->floor_color);
+	int i;
+	int color;
+
+	i = 0;
+	color = rgb_to_int(game->scene->cieling_color[0],
+					game->scene->cieling_color[1],
+					game->scene->cieling_color[2]);
+	while (i < draw_start)
+	{
+		printf("The color for cieling is %d , %d and %d\nThe color is %d\n",game->scene->cieling_color[0],
+					game->scene->cieling_color[1],
+					game->scene->cieling_color[2], color);
+		if (x >= 0 && x < SCREEN_W && i >= 0 && i < SCREEN_H)
+			mlx_put_pixel(game->mlx->img, x, i, color);
+		i++;
+	}
+}
+
+static void draw_floor(t_game *game, int x, int y)
+{
+	int color;
+
+	color = rgb_to_int(game->scene->floor_color[0],
+						game->scene->floor_color[1],
+						game->scene->floor_color[2]);
+	printf("The color for floor is %d, %d and %d\nThe color is %d\n", game->scene->floor_color[0],
+						game->scene->floor_color[1],
+						game->scene->floor_color[2], color);
+	while (y < SCREEN_H)
+	{
+		if (x >= 0 && x < SCREEN_W && y >= 0 && y < SCREEN_H)
+			mlx_put_pixel(game->mlx->img, x, y, color);
+		y++;
+	}
 }
 
 void	draw_column(t_game *game, int x)
