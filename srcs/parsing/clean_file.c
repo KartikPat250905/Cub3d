@@ -87,6 +87,8 @@ int	compress_file(t_scene *scene, char *file)
 			add_line_to_scene(scene, line, i);
 			i++;
 		}
+		else
+			free(line);
 	}
 	close(fd);
 	return (i);
