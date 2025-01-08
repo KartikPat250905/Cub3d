@@ -26,7 +26,7 @@ void	parse_north(t_scene *scene, char *line);
 void	parse_south(t_scene *scene, char *line);
 void	parse_east(t_scene *scene, char *line);
 void	parse_west(t_scene *scene, char *line);
-void	fill_data(t_scene *scene, t_etype type, char *line, int num, int len);
+void	fill_data(t_scene *scene, t_etype type, char *line);
 void	parse_color(t_scene *scene, char *line, int is_cieling);
 void	get_colors(t_scene *scene, char *line, int who);
 void	add_rgb(t_scene *scene, char **splits, int who);

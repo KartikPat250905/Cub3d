@@ -1,14 +1,16 @@
-#include "cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: karpatel <karpatel@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/08 11:05:59 by karpatel          #+#    #+#             */
+/*   Updated: 2025/01/08 11:06:01 by karpatel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-/*
-1. The map must be closed i.e surrounded by walls.
-2. Except for the map content(0 and 1), each type of element can be separated by one or more empty line(s).
-3. Except for the map content which always has to be the last, each type of element(texture and floor color) can be set in any order in the file.
-4. Except for the map, each type of information from an element can be separated by one or more space(s).
-5. Identifier is the first thing on the line followed by spaces and then the path or color
-6. rgb range is [0,255]
-7. Map might contain exmpty spaces.
-*/
+#include "cub3d.h"
 
 int	file_valid(char *file)
 {
@@ -16,7 +18,7 @@ int	file_valid(char *file)
 	int	fd;
 
 	i = 0;
-	while(file[i])
+	while (file[i])
 		i++;
 	while (i > 0 && file[i] != '.')
 	{
@@ -82,10 +84,16 @@ void	fetch_file(t_scene *scene, int len)
 			return ;
 		type = get_element_type(line);
 		if (type == PARSE_UNKNOWN)
-			perror_and_exit(scene, "The .cub file has some undesired inputs", 1);
-		fill_data(scene, type, line, i, len);
+		{
+			perror_and_exit(scene, "The .cub file has some"
+				"undesired inputs", 1);
+		}
+		fill_data(scene, type, line);
 		if (type == PARSE_MAP)
+		{
+			parse_map(scene, i, len);
 			break ;
+		}
 		i++;
 	}
 }

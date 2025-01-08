@@ -151,6 +151,9 @@ typedef enum	e_type
 //		game_initialization.c
 int		init_game(t_game *game, int ac, char **av);
 
+//		game_init_utils.c
+void	set_west_and_east(t_player *plr, char dir);
+
 //		srcs/draw_utils.c
 void	background_color(t_mlx *mlx, unsigned int color);
 void	draw_column(t_game *game, int x);

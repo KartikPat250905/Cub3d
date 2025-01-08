@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fill_data.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: karpatel <karpatel@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/08 11:03:55 by karpatel          #+#    #+#             */
+/*   Updated: 2025/01/08 11:03:56 by karpatel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 int	get_path(t_scene *scene, char *line, int i)
@@ -14,7 +26,7 @@ int	get_path(t_scene *scene, char *line, int i)
 	return (start);
 }
 
-void	fill_data(t_scene *scene, t_etype type, char *line, int num, int len)
+void	fill_data(t_scene *scene, t_etype type, char *line)
 {
 	if (type == PARSE_NORTH)
 		parse_north(scene, line);
@@ -28,6 +40,4 @@ void	fill_data(t_scene *scene, t_etype type, char *line, int num, int len)
 		parse_color(scene, line, 1);
 	else if (type == PARSE_FLOOR)
 		parse_color(scene, line, 0);
-	else if (type == PARSE_MAP)
-		parse_map(scene, num, len);
 }
