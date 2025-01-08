@@ -25,4 +25,3 @@ int	ft_is_num_str(char *str)
 	}
 	return (1);
 }
-

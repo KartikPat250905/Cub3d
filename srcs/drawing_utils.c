@@ -53,11 +53,11 @@ static void draw_ceiling(t_game *game, int x, int draw_start)
 	color = rgb_to_int(game->scene->cieling_color[0],
 					game->scene->cieling_color[1],
 					game->scene->cieling_color[2]);
-	while (i < draw_start)
-	{
-		printf("The color for cieling is %d , %d and %d\nThe color is %d\n",game->scene->cieling_color[0],
+	printf("The color for cieling is %d , %d and %d\nThe color is %d\n",game->scene->cieling_color[0],
 					game->scene->cieling_color[1],
 					game->scene->cieling_color[2], color);
+	while (i < draw_start)
+	{
 		if (x >= 0 && x < SCREEN_W && i >= 0 && i < SCREEN_H)
 			mlx_put_pixel(game->mlx->img, x, i, color);
 		i++;
