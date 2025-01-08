@@ -6,7 +6,7 @@
 /*   By: karpatel <karpatel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:48:58 by karpatel          #+#    #+#             */
-/*   Updated: 2025/01/08 11:49:00 by karpatel         ###   ########.fr       */
+/*   Updated: 2025/01/08 14:07:55 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	init_mlx(t_scene *scene, t_mlx *mlx)
 		exit(EXIT_FAILURE);
 	}
 	mlx->img = mlx_new_image(mlx->mlx, SCREEN_W, SCREEN_H);
-	if (!mlx->img)
+	if (!mlx->img || !load_textures(scene, mlx))
 	{
 		mlx_terminate(mlx->mlx);
 		free_and_exit(scene, EXIT_FAILURE);
