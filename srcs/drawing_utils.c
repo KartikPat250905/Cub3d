@@ -6,11 +6,19 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:42:53 by motuomin          #+#    #+#             */
-/*   Updated: 2025/01/07 14:42:20 by motuomin         ###   ########.fr       */
+/*   Updated: 2025/01/08 13:29:21 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+static unsigned int	get_color(int r, int g, int b, int a)
+{
+	unsigned int color;
+
+	color = (r << 24) | (g << 16) | (b << 8) | a;
+	return (color);
+}
 
 void	background_color(t_mlx *mlx, unsigned int color)
 {
@@ -31,6 +39,7 @@ void	background_color(t_mlx *mlx, unsigned int color)
 	}
 }
 
+/*
 int rgb_to_int(int r, int g, int b)
 {
 	if (r < 0) r = 0;
@@ -41,7 +50,7 @@ int rgb_to_int(int r, int g, int b)
 	if (b > 255) b = 255;
 
 	return (r << 16) | (g << 8) | b;
-}
+}*/
 
 
 static void draw_ceiling(t_game *game, int x, int draw_start)
@@ -50,14 +59,11 @@ static void draw_ceiling(t_game *game, int x, int draw_start)
 	int color;
 
 	i = 0;
-	color = rgb_to_int(game->scene->cieling_color[0],
+	color = get_color(game->scene->cieling_color[0],
 					game->scene->cieling_color[1],
-					game->scene->cieling_color[2]);
+					game->scene->cieling_color[2], 255);
 	while (i < draw_start)
 	{
-		printf("The color for cieling is %d , %d and %d\nThe color is %d\n",game->scene->cieling_color[0],
-					game->scene->cieling_color[1],
-					game->scene->cieling_color[2], color);
 		if (x >= 0 && x < SCREEN_W && i >= 0 && i < SCREEN_H)
 			mlx_put_pixel(game->mlx->img, x, i, color);
 		i++;
@@ -68,12 +74,9 @@ static void draw_floor(t_game *game, int x, int y)
 {
 	int color;
 
-	color = rgb_to_int(game->scene->floor_color[0],
+	color = get_color(game->scene->floor_color[0],
 						game->scene->floor_color[1],
-						game->scene->floor_color[2]);
-	printf("The color for floor is %d, %d and %d\nThe color is %d\n", game->scene->floor_color[0],
-						game->scene->floor_color[1],
-						game->scene->floor_color[2], color);
+						game->scene->floor_color[2], 255);
 	while (y < SCREEN_H)
 	{
 		if (x >= 0 && x < SCREEN_W && y >= 0 && y < SCREEN_H)
@@ -99,7 +102,7 @@ void	draw_column(t_game *game, int x)
 	while (draw_start < draw_end)
 	{
 		if (game->ray.side == 1)
-			mlx_put_pixel(game->mlx->img, x, draw_start, RED);
+			mlx_put_pixel(game->mlx->img, x, draw_start, BLUE);
 		else
 			mlx_put_pixel(game->mlx->img, x, draw_start, BLACK);
 		draw_start++;
