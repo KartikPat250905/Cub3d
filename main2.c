@@ -120,6 +120,8 @@ int	main(int ac, char **av)
 {
 	t_game	*game;
 
+	if (ac != 2)
+		return (1);
 	game = malloc(sizeof(t_game));
 	if (!init_game(game, ac, av))
 		return (1);
