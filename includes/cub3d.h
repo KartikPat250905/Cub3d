@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:46:15 by motuomin          #+#    #+#             */
-/*   Updated: 2025/01/08 13:22:57 by motuomin         ###   ########.fr       */
+/*   Updated: 2025/01/08 14:06:05 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ int		init_game(t_game *game, int ac, char **av);
 
 //		game_init_utils.c
 void	set_west_and_east(t_player *plr, char dir);
+int		load_textures(t_scene *s, t_mlx *mlx);
 
 //		srcs/draw_utils.c
 void	background_color(t_mlx *mlx, unsigned int color);
