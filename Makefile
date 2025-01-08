@@ -16,6 +16,7 @@ SOURCES = srcs/parsing/parsing.c \
 		  srcs/parsing/parse_textures.c \
 		  srcs/parsing/parse_colors.c \
 		  srcs/parsing/parse_map.c \
+		  srcs/parsing/parse_map_utils.c \
 		  srcs/parsing/parse_utils.c \
 		  srcs/free/free_parsing.c \
 		  srcs/free/error.c \
