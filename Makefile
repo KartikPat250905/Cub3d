@@ -19,6 +19,7 @@ SOURCES = srcs/parsing/parsing.c \
 		  srcs/parsing/parse_map_utils.c \
 		  srcs/parsing/parse_utils.c \
 		  srcs/free/free_parsing.c \
+		  srcs/free/free_textures.c \
 		  srcs/free/error.c \
 		  srcs/game_init_utils.c \
 		  main2.c \

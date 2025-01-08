@@ -14,6 +14,7 @@
 
 void	print_map(char **map)
 {
+	//remove me later.
 	for (int i = 0; map[i]; i++)
 	{
 		for (int j = 0; map[i][j]; j++)

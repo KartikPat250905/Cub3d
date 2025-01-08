@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:42:53 by motuomin          #+#    #+#             */
-/*   Updated: 2025/01/08 13:29:21 by motuomin         ###   ########.fr       */
+/*   Updated: 2025/01/07 14:42:20 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	background_color(t_mlx *mlx, unsigned int color)
 	}
 }
 
-/*
 int rgb_to_int(int r, int g, int b)
 {
 	if (r < 0) r = 0;
@@ -48,9 +47,9 @@ int rgb_to_int(int r, int g, int b)
 	if (g > 255) g = 255;
 	if (b < 0) b = 0;
 	if (b > 255) b = 255;
-
+	if (b > 255) b = 255;
 	return (r << 16) | (g << 8) | b;
-}*/
+}
 
 
 static void draw_ceiling(t_game *game, int x, int draw_start)
@@ -102,7 +101,7 @@ void	draw_column(t_game *game, int x)
 	while (draw_start < draw_end)
 	{
 		if (game->ray.side == 1)
-			mlx_put_pixel(game->mlx->img, x, draw_start, BLUE);
+			mlx_put_pixel(game->mlx->img, x, draw_start, RED);
 		else
 			mlx_put_pixel(game->mlx->img, x, draw_start, BLACK);
 		draw_start++;

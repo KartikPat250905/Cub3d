@@ -18,7 +18,10 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 
 	game = (t_game *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+	{
+		free_textures_mlx(game->mlx);
 		free_and_exit(game->scene, EXIT_SUCCESS);
+	}
 	else if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
 		move(game->scene, game->plr, UP);
 	else if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
