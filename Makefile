@@ -26,7 +26,8 @@ SOURCES = srcs/parsing/parsing.c \
 		  srcs/game_initialization.c \
 		  srcs/key_hook.c \
 		  srcs/movement.c \
-		  srcs/drawing_utils.c
+		  srcs/drawing_utils.c \
+		  srcs/drawing_utils2.c
 
 OBJECTS = $(SOURCES:.c=.o)
 

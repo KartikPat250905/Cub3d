@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:42:53 by motuomin          #+#    #+#             */
-/*   Updated: 2025/01/09 15:10:56 by motuomin         ###   ########.fr       */
+/*   Updated: 2025/01/09 15:34:11 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,6 @@ void	background_color(t_mlx *mlx, unsigned int color)
 		y++;
 	}
 }
-
-int rgb_to_int(int r, int g, int b)
-{
-	if (r < 0) r = 0;
-	if (r > 255) r = 255;
-	if (g < 0) g = 0;
-	if (g > 255) g = 255;
-	if (b < 0) b = 0;
-	if (b > 255) b = 255;
-	if (b > 255) b = 255;
-	return (r << 16) | (g << 8) | b;
-}
-
 
 static void draw_ceiling(t_game *game, int x, int draw_start)
 {
@@ -84,27 +71,19 @@ static void draw_floor(t_game *game, int x, int y)
 	}
 }
 
-void	draw_column(t_game *game, int x)
+void draw_column(t_game *game, int x)
 {
-	int	line_height;
-	int	draw_start;
-	int	draw_end;
+    t_draw d;
+    
+	get_draw_info(&d, game);
+    draw_ceiling(game, x, d.draw_start);
 
-	line_height = (int)(SCREEN_H / game->ray.p_dist);
-	draw_start = -line_height / 2 + SCREEN_H / 2;
-	if (draw_start < 0)
-		draw_start = 0;
-	draw_end = line_height / 2 + SCREEN_H / 2;
-	if (draw_end > SCREEN_H)
-		draw_end = SCREEN_H - 1;
-	draw_ceiling(game, x, draw_start);
-	while (draw_start < draw_end)
-	{
-		if (game->ray.side == 1)
-			mlx_put_pixel(game->mlx->img, x, draw_start, BLUE);
-		else
-			mlx_put_pixel(game->mlx->img, x, draw_start, BLACK);
-		draw_start++;
-	}
-	draw_floor(game, x, draw_start);
+    while (d.draw_start < d.draw_end)
+    {
+        get_texture_pixel(&d, game);
+        d.color = ((int *)d.texture->pixels)[d.tex_y * d.texture->width + d.tex_x];
+        mlx_put_pixel(game->mlx->img, x, d.draw_start, d.color);
+        d.draw_start++;
+    }
+    draw_floor(game, x, d.draw_start);
 }

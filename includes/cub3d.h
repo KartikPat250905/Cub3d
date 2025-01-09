@@ -40,6 +40,16 @@ typedef enum e_dir
 	RIGHT
 }	t_dir;
 
+typedef struct s_draw
+{
+	int	line_height;
+	int	draw_start;
+	int	draw_end;
+	int	tex_y;
+	int	tex_x;
+	int	color;
+	mlx_image_t *texture;
+} t_draw;
 
 typedef struct s_mlx
 {
@@ -155,9 +165,14 @@ int		init_game(t_game *game, int ac, char **av);
 void	set_west_and_east(t_player *plr, char dir);
 int		load_textures(t_scene *s, t_mlx *mlx);
 
-//		srcs/draw_utils.c
+//		srcs/drawing_utils.c
 void	background_color(t_mlx *mlx, unsigned int color);
 void	draw_column(t_game *game, int x);
+
+//		srcs/drawing_utils2.c
+void 	get_draw_info(t_draw *d, t_game *game);
+void    get_texture_pixel(t_draw *d, t_game *game);
+
 
 //		srcs/key_hook.c
 void	key_hook(mlx_key_data_t keydata, void *param);
