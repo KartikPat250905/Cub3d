@@ -48,6 +48,10 @@ typedef struct s_draw
 	int	tex_y;
 	int	tex_x;
 	int	color;
+	int	r;
+	int	g;
+	int	b;
+	int	a;
 	mlx_image_t *texture;
 } t_draw;
 
