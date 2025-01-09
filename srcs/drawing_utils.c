@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:42:53 by motuomin          #+#    #+#             */
-/*   Updated: 2025/01/07 14:42:20 by motuomin         ###   ########.fr       */
+/*   Updated: 2025/01/09 15:10:56 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	draw_column(t_game *game, int x)
 	while (draw_start < draw_end)
 	{
 		if (game->ray.side == 1)
-			mlx_put_pixel(game->mlx->img, x, draw_start, RED);
+			mlx_put_pixel(game->mlx->img, x, draw_start, BLUE);
 		else
 			mlx_put_pixel(game->mlx->img, x, draw_start, BLACK);
 		draw_start++;

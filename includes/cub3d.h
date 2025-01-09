@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:46:15 by motuomin          #+#    #+#             */
-/*   Updated: 2025/01/08 14:06:05 by motuomin         ###   ########.fr       */
+/*   Updated: 2025/01/09 15:13:46 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ typedef enum	e_type
 # define SCREEN_W	700
 # define SCREEN_H	500
 # define SPEED		1
-# define R_SPEED	0.5
+# define R_SPEED	PI/2
 # define TILE_SIZE	64
 
 // COLORS
