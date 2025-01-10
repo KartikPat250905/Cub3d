@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:46:11 by motuomin          #+#    #+#             */
-/*   Updated: 2025/01/07 13:46:20 by motuomin         ###   ########.fr       */
+/*   Updated: 2025/01/09 18:03:46 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,34 +39,23 @@ static void	calculate_step_and_dist(t_player *plr, t_ray *ray)
 static void	update_values(t_player *plr, t_ray *ray, int x)
 {
 	ray->hit = 0;
-
-	// Our horizontal position on the screen
 	ray->cam_x = 2 * x / (float)SCREEN_W - 1;
-
-	// Direction vector of the current ray
 	ray->dir_x = plr->dir_x + plr->pln_x * ray->cam_x;
 	ray->dir_y = plr->dir_y + plr->pln_y * ray->cam_x;
-
-	// Which box of the map we're in
 	ray->map_x = (int)plr->pos_x;
 	ray->map_y = (int)plr->pos_y;
-
-	// Distance until next vertical grid side
 	if (ray->dir_x == 0)
 		ray->d_dist_x = 1e30;
 	else
 		ray->d_dist_x = sqrt(1 + (ray->dir_y * ray->dir_y) / (ray->dir_x * ray->dir_x));
-	// Distance until next horizontal grid side
 	if (ray->dir_y == 0)
 		ray->d_dist_y = 1e30;
 	else
 		ray->d_dist_y = sqrt(1 + (ray->dir_x * ray->dir_x) / (ray->dir_y * ray->dir_y));
-	// Get the absolute value for distance
 	if (ray->d_dist_x < 0)
 		ray->d_dist_x *= (-1);
 	if (ray->d_dist_y < 0)
 		ray->d_dist_y *= (-1);
-
 	calculate_step_and_dist(plr, ray);
 }
 
