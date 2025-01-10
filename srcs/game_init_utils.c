@@ -20,22 +20,22 @@ int	load_textures(t_scene *s, t_mlx *mlx)
 	if (!t)
 		return (0);
 	mlx->t_n = mlx_texture_to_image(mlx->mlx, t);
-	free(t);
+	mlx_delete_texture(t);
 	t = mlx_load_png(s->south);
 	if (!t)
 		return (0);
 	mlx->t_s = mlx_texture_to_image(mlx->mlx, t);
-	free(t);
+	mlx_delete_texture(t);
 	t = mlx_load_png(s->east);
 	if (!t)
 		return (0);
 	mlx->t_e = mlx_texture_to_image(mlx->mlx, t);
-	free(t);
+	mlx_delete_texture(t);
 	t = mlx_load_png(s->west);
 	if (!t)
 		return (0);
 	mlx->t_w = mlx_texture_to_image(mlx->mlx, t);
-	free(t);
+	mlx_delete_texture(t);
 	return (1);
 }
 

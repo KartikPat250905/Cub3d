@@ -168,6 +168,7 @@ void	rotate(t_player *p, t_dir dir);
 
 //srcs/free/free_textures.c
 void	free_textures_mlx(t_mlx *mlx);
+void	free_game(t_game *game);
 
 // parsing/*.c
 int		compress_file(t_scene *scene, char *file);
