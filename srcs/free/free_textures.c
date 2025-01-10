@@ -15,7 +15,7 @@
 void	free_game(t_game *game)
 {
 	if (!game)
-		return;
+		return ;
 	if (game->plr)
 	{
 		free(game->plr);

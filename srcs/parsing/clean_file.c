@@ -90,7 +90,7 @@ int	compress_file(t_scene *scene, char *file)
 	char	*line;
 	int		i;
 
-	scene -> file = ft_calloc((ft_count_flines(scene, file) + 2), sizeof(char *));
+	scene->file = ft_calloc((ft_count_flines(scene, file) + 2), sizeof(char *));
 	if (!scene -> file)
 		perror_and_exit(scene, "Error malloc failed.", 1);
 	fd = open(file, O_RDONLY);

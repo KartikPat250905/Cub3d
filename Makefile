@@ -22,7 +22,8 @@ SOURCES = srcs/parsing/parsing.c \
 		  srcs/free/free_textures.c \
 		  srcs/free/error.c \
 		  srcs/game_init_utils.c \
-		  main2.c \
+		  main.c \
+		  raytracing.c \
 		  srcs/game_initialization.c \
 		  srcs/key_hook.c \
 		  srcs/movement.c \
