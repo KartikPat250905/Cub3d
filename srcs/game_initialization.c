@@ -93,8 +93,18 @@ int	init_game(t_game *game, int ac, char **av)
 	if (ac != 2)
 		return (0);
 	game->mlx = malloc(sizeof(t_mlx));
+	if (!game->mlx)
+	{
+		printf("Error malloc failed.");
+		exit (1);
+	}
 	game->scene = parsing_main(av);
 	game->plr = malloc(sizeof(t_player));
+	if (!game->plr)
+	{
+		free_game(game);
+		perror_and_exit(game->scene, "Error malloc failed.", 1);
+	}
 	game->plr = set_starting_pos(game, game->plr);
 	if (!game->scene)
 		return (0);
