@@ -104,11 +104,15 @@ void	parse_map(t_scene *scene, int index, int len)
 	validate_row_extension(scene, index);
 	is_valid(scene, scene->file, index, 0);
 	scene->map = ft_calloc(len - index + 1, sizeof(char *));
+	if (!scene->map)
+		perror_and_exit(scene, "Error malloc failed.", 1);
 	i = 0;
 	while (scene->file[index])
 	{
 		scene->map[i] = ft_calloc(ft_strlen(scene->file[index]) + 1,
 				sizeof(char));
+		if (!scene->map[i])
+			perror_and_exit(scene, "Error malloc failed.", 1);
 		ft_strlcpy(scene->map[i++], scene->file[index],
 			ft_strlen(scene->file[index]) + 1);
 		index++;

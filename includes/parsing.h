@@ -29,7 +29,7 @@ void	parse_west(t_scene *scene, char *line);
 void	fill_data(t_scene *scene, t_etype type, char *line);
 void	parse_color(t_scene *scene, char *line, int is_cieling);
 void	get_colors(t_scene *scene, char *line, int who);
-void	add_rgb(t_scene *scene, char **splits, int who);
+void	add_rgb(t_scene *scene, char **splits, int who, char *no_spaces);
 void	parse_map(t_scene *scene, int index, int len);
 void	validate_row_extension(t_scene *scene, int index);
 void	change_space(char **file, int row, int col, int ch);

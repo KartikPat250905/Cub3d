@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	add_rgb(t_scene *scene, char **splits, int who)
+void	add_rgb(t_scene *scene, char **splits, int who, char *no_spaces)
 {
 	int	i;
 	int	*color;
@@ -34,6 +34,8 @@ void	add_rgb(t_scene *scene, char **splits, int who)
 	}
 	if (splits[3] != NULL)
 		perror_and_exit(scene, "Error the colors have more stuff than RGB", 1);
+	free_array((void **)splits);
+	free(no_spaces);
 }
 
 void	get_colors(t_scene *scene, char *line, int who)
@@ -48,6 +50,8 @@ void	get_colors(t_scene *scene, char *line, int who)
 	while (line[i])
 		len += !ft_isspace(line[i++]);
 	no_spaces = ft_calloc((len + 1), sizeof(char));
+	if (!no_spaces)
+		perror_and_exit(scene, "Error malloc failed.", 1);
 	i = 0;
 	len = 0;
 	while (line[i])
@@ -57,9 +61,9 @@ void	get_colors(t_scene *scene, char *line, int who)
 		i++;
 	}
 	splits = ft_split(no_spaces, ',');
-	add_rgb(scene, splits, who);
-	free_array((void **)splits);
-	free(no_spaces);
+	if (!splits)
+		perror_and_exit(scene, "Error malloc failed.", 1);
+	add_rgb(scene, splits, who, no_spaces);
 }
 
 void	parse_color(t_scene *scene, char *line, int is_cieling)

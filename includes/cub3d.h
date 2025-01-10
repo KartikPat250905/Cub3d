@@ -173,7 +173,7 @@ void	free_textures_mlx(t_mlx *mlx);
 int		compress_file(t_scene *scene, char *file);
 int		get_line(char **line, int fd);
 t_scene	*parsing_main(char **argv);
-void	trim_spaces(char **line);
+void	trim_spaces(t_scene *scene, char **line);
 void	perror_and_exit(t_scene *scene, char *str, int exit);
 
 

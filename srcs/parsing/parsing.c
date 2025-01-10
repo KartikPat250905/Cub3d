@@ -79,7 +79,7 @@ void	fetch_file(t_scene *scene, int len)
 	while (scene->file && scene->file[i])
 	{
 		line = scene -> file[i];
-		trim_spaces(&line);
+		trim_spaces(scene, &line);
 		if (line == NULL)
 			return ;
 		type = get_element_type(line);
@@ -106,8 +106,14 @@ t_scene	*parsing_main(char **argv)
 	if (!file_valid(argv[1]))
 		return (NULL);
 	scene = ft_calloc(1, sizeof(t_scene));
+	if (!scene)
+		perror_and_exit(scene, "Error malloc failed.", 1);
 	scene->cieling_color = malloc(sizeof(int) * 3);
+	if (!scene -> cieling_color)
+		perror_and_exit(scene, "Error malloc failed.", 1);
 	scene->floor_color = malloc(sizeof(int) * 3);
+	if (!scene->floor_color)
+		perror_and_exit(scene, "Error malloc failed.", 1);
 	len = compress_file(scene, argv[1]);
 	fetch_file(scene, len);
 	check_if_data_fetched(scene);

@@ -23,6 +23,8 @@ void	parse_north(t_scene *scene, char *line)
 		perror_and_exit(scene, "Open failed north", 1);
 	close(i);
 	scene->north = ft_strdup(line + start);
+	if (!scene->north)
+		perror_and_exit(scene, "Error malloc failed.", 1);
 }
 
 void	parse_south(t_scene *scene, char *line)
@@ -36,6 +38,8 @@ void	parse_south(t_scene *scene, char *line)
 		perror_and_exit(scene, "Open failed south", 1);
 	close(i);
 	scene->south = ft_strdup(line + start);
+	if (!scene->south)
+		perror_and_exit(scene, "Error malloc failed.", 1);
 }
 
 void	parse_east(t_scene *scene, char *line)
@@ -49,6 +53,8 @@ void	parse_east(t_scene *scene, char *line)
 		perror_and_exit(scene, "Open failed east", 1);
 	close(i);
 	scene->east = ft_strdup(line + start);
+	if (!scene->east)
+		perror_and_exit(scene, "Error malloc failed.", 1);
 }
 
 void	parse_west(t_scene *scene, char *line)
@@ -62,4 +68,6 @@ void	parse_west(t_scene *scene, char *line)
 		perror_and_exit(scene, "Open failed west", 1);
 	close(i);
 	scene->west = ft_strdup(line + start);
+	if (!scene->west)
+		perror_and_exit(scene, "Error malloc failed.", 1);
 }
