@@ -12,17 +12,23 @@
 
 #include "../includes/cub3d.h"
 
+/*
 void	print_map(char **map)
 {
-	//remove me later.
-	for (int i = 0; map[i]; i++)
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
 	{
-		for (int j = 0; map[i][j]; j++)
-			printf("%c ", map[i][j]);
+		j = 0;
+		while (map[i][j])
+			printf("%c ", map[i][j++]);
 		printf("\n");
+		i++;
 	}
 	printf("\n");
-}
+}*/
 
 static void	move_plr(float move_x, float move_y, t_player *p, t_scene *s)
 {
@@ -38,14 +44,12 @@ static void	move_plr(float move_x, float move_y, t_player *p, t_scene *s)
 		p->pos_y += move_y;
 		s->map[(int)p->pos_y][(int)p->pos_x] = 'C';
 	}
-	print_map(s->map);
 }
-
 
 void	move(t_scene *s, t_player *p, t_dir dir)
 {
-	float move_x;
-	float move_y;
+	float	move_x;
+	float	move_y;
 
 	if (dir == UP || dir == DOWN)
 	{

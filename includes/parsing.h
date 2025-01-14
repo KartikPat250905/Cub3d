@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: karpatel <karpatel@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/10 14:56:35 by karpatel          #+#    #+#             */
+/*   Updated: 2025/01/10 14:56:37 by karpatel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PARSING_H
 # define PARSING_H
 
@@ -13,11 +25,9 @@ typedef struct s_scene
 	int		*floor_color;
 	int		*cieling_color;
 	char	**file;
-	// starting direction?
-	// starting pos?
 }				t_scene;
 
-typedef enum e_type t_etype;
+typedef enum e_type	t_etype;
 
 void	check_if_data_fetched(t_scene *scene);
 void	free_and_exit(t_scene *scene, int code);

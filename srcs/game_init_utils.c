@@ -14,7 +14,7 @@
 
 int	load_textures(t_scene *s, t_mlx *mlx)
 {
-	mlx_texture_t *t;
+	mlx_texture_t	*t;
 
 	t = mlx_load_png(s->north);
 	if (!t)
