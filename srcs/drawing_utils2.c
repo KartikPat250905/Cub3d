@@ -14,15 +14,18 @@
 
 void	get_texture_pixel(t_draw *d, t_game *game)
 {
-	d->tex_y = (int)((d->draw_start - SCREEN_H / 2 + d->line_height / 2) * d->texture->height / d->line_height);
+	d->tex_y = (int)((float)d->texture->height * (((float)d->draw_start - \
+		((float)SCREEN_H - d->line_height) / 2) / d->line_height));
 	if (d->tex_y < 0)
 		d->tex_y = 0;
 	if ((unsigned int)d->tex_y >= (unsigned int)d->texture->height)
 		d->tex_y = d->texture->height - 1;
 	if (game->ray.side == 0)
-		d->tex_x = (int)((game->ray.map_y + (1 - game->ray.dir_y * (game->ray.p_dist))) * d->texture->width) % d->texture->width;
+		d->tex_x = (int)((1.0 - (float)(game->ray.dir_y * game->ray.p_dist \
+		- game->ray.map_y)) * d->texture->width) % d->texture->width;
 	else
-		d->tex_x = (int)((game->ray.map_x + (1 - game->ray.dir_x * (game->ray.p_dist))) * d->texture->width) % d->texture->width;
+		d->tex_x = (int)((1.0 - (float)(game->ray.dir_x * game->ray.p_dist \
+		- game->ray.map_x)) * d->texture->width) % d->texture->width;
 	if (d->tex_x < 0)
 		d->tex_x = 0;
 	if ((unsigned int)d->tex_x >= (unsigned int)d->texture->width)
@@ -30,7 +33,7 @@ void	get_texture_pixel(t_draw *d, t_game *game)
 	if (d->tex_y < 0)
 		d->tex_y = 0;
 	if ((unsigned int)d->tex_y >= (unsigned int)d->texture->height)
-		d->tex_y = d->texture->height - 1; 
+		d->tex_y = d->texture->height - 1;
 }
 
 void	get_draw_info(t_draw *d, t_game *game)
