@@ -73,15 +73,15 @@ typedef struct s_ray
 	float	dir_y;
 	int		map_x;
 	int		map_y;
-	float	s_dist_x;
-	float	s_dist_y;
-	float	d_dist_x;
-	float	d_dist_y;
-	float	p_dist;
-	int		step_x;
-	int		step_y;
+	float	plr_len_x;
+	float	plr_len_y;
+	float	len_x_stp;
+	float	len_y_stp;
+	float	final_dist;
+	int		step_dir_x;
+	int		step_dir_y;
 	int		hit;
-	int		side;
+	char	side;
 
 }	t_ray;
 
@@ -151,9 +151,6 @@ void	draw_column(t_game *game, int x);
 void	get_draw_info(t_draw *d, t_game *game);
 void	get_texture_pixel(t_draw *d, t_game *game);
 
-//main.c
-void	update_values(t_player *plr, t_ray *ray, int x);
-
 //		srcs/key_hook.c
 void	key_hook(mlx_key_data_t keydata, void *param);
 
@@ -161,15 +158,15 @@ void	key_hook(mlx_key_data_t keydata, void *param);
 void	move(t_scene *s, t_player *p, t_dir dir);
 void	rotate(t_player *p, t_dir dir);
 
-//srcs/free/free_textures.c
+//		srcs/free/free_textures.c
 void	free_textures_mlx(t_mlx *mlx);
 void	free_game(t_game *game);
 
-//srcs/raytracing.c
+//		srcs/raytracing.c
 void	dda(t_ray *ray, t_scene *scene);
 int		raycast_loop(t_game *game, t_scene *scene, t_player *plr, t_ray *ray);
 
-// parsing/*.c
+// 		parsing/*.c
 int		compress_file(t_scene *scene, char *file);
 int		get_line(char **line, int fd);
 t_scene	*parsing_main(char **argv);
