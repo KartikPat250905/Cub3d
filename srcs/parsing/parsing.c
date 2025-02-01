@@ -104,7 +104,10 @@ t_scene	*parsing_main(char **argv)
 	int		len;
 
 	if (!file_valid(argv[1]))
+	{
+		printf("Error\n");
 		return (NULL);
+	}
 	scene = ft_calloc(1, sizeof(t_scene));
 	if (!scene)
 		perror_and_exit(scene, "Error malloc failed.", 1);
