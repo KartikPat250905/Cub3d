@@ -25,6 +25,7 @@ typedef struct s_scene
 	int		*floor_color;
 	int		*cieling_color;
 	char	**file;
+	int		total_attr;
 }				t_scene;
 
 typedef enum e_type	t_etype;
@@ -44,5 +45,6 @@ void	parse_map(t_scene *scene, int index, int len);
 void	validate_row_extension(t_scene *scene, int index);
 void	change_space(char **file, int row, int col, int ch);
 int		get_element_type(char *line);
+void	reset_scene_attributes(t_scene *scene);
 
 #endif

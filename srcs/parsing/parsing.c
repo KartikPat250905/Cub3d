@@ -94,6 +94,7 @@ void	fetch_file(t_scene *scene, int len)
 			parse_map(scene, i, len);
 			break ;
 		}
+		scene->total_attr++;
 		i++;
 	}
 }
@@ -109,6 +110,7 @@ t_scene	*parsing_main(char **argv)
 		return (NULL);
 	}
 	scene = ft_calloc(1, sizeof(t_scene));
+	scene->total_attr = 0;
 	if (!scene)
 		perror_and_exit(scene, "Error malloc failed.", 1);
 	scene->cieling_color = malloc(sizeof(int) * 3);

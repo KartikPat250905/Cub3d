@@ -100,6 +100,8 @@ void	parse_map(t_scene *scene, int index, int len)
 {
 	int	i;
 
+	if (scene->total_attr != 6)
+		perror_and_exit(scene, "The order of the attributes in .cub file is not as expected.", 1);
 	check_borders(scene, index, len - 1);
 	validate_row_extension(scene, index);
 	is_valid(scene, scene->file, index, 0);
