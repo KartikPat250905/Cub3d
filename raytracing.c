@@ -6,12 +6,11 @@
 /*   By: karpatel <karpatel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 14:43:14 by karpatel          #+#    #+#             */
-/*   Updated: 2025/01/10 14:43:15 by karpatel         ###   ########.fr       */
+/*   Updated: 2025/02/01 14:17:01 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 /*
 	len_x_stp = the length of the ray between 2 vertical grid lines
@@ -19,6 +18,7 @@
 	plr_len_x = The lenght of the ray from the plrs pos to next vertical line
 	plr_len_y = The lenght of the ray from the plrs pos to next horizontal line
 */
+
 static void	calculate_step_and_dist(t_player *plr, t_ray *ray)
 {
 	if (ray->dir_x < 0)
