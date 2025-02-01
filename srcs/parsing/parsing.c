@@ -80,8 +80,6 @@ void	fetch_file(t_scene *scene, int len)
 	{
 		line = scene -> file[i];
 		trim_spaces(scene, &line);
-		if (line == NULL)
-			return ;
 		type = get_element_type(line);
 		if (type == PARSE_UNKNOWN)
 		{
