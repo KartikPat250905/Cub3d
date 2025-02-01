@@ -24,7 +24,7 @@ void	validate_row_extension(t_scene *scene, int index)
 		while (scene->file[index][x])
 		{
 			if (x > last_len && scene->file[index][x] != '1')
-				perror_and_exit(scene, "Error the map is open "
+				perror_and_exit(scene, "The map is open "
 					"from the boundaries.", 1);
 			x++;
 		}
