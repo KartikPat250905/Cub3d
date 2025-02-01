@@ -6,7 +6,7 @@
 /*   By: karpatel <karpatel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:48:58 by karpatel          #+#    #+#             */
-/*   Updated: 2025/01/08 14:07:55 by motuomin         ###   ########.fr       */
+/*   Updated: 2025/02/01 15:55:40 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,10 @@ static t_player	*set_starting_pos(t_game *game, t_player *player)
 int	init_game(t_game *game, int ac, char **av)
 {
 	if (ac != 2)
+	{
+		printf("Use program as follows : \"./cub3D <map_file.cub>\"\n");
 		return (0);
+	}
 	game->scene = parsing_main(av);
 	if (!game->scene)
 		return (0);

@@ -20,8 +20,6 @@
 # include <unistd.h>       // close, read, write
 # include <stdio.h>        // printf, perror
 # include <stdlib.h>       // malloc, free, exit
-# include <string.h>       // strerror
-# include <sys/time.h>     // gettimeofday
 # include <math.h>         // All functions of the math library
 
 // Header files

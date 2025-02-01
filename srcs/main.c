@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main2.c                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:46:11 by motuomin          #+#    #+#             */
-/*   Updated: 2025/01/09 18:03:46 by motuomin         ###   ########.fr       */
+/*   Updated: 2025/02/01 15:53:53 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3d.h"
+#include "../includes/cub3d.h"
 
 static void	game_loop(void *ptr)
 {
@@ -24,8 +24,6 @@ int	main(int ac, char **av)
 {
 	t_game	*game;
 
-	if (ac != 2)
-		return (1);
 	game = malloc(sizeof(t_game));
 	if (!game)
 	{

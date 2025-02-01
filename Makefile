@@ -1,7 +1,7 @@
 NAME = cub3D
 CC = cc
 INCLUDES = -Iincludes -I $(MLX)/include
-CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 #CFLAGS = -g
 LIBFT = ./libft
 
@@ -22,8 +22,8 @@ SOURCES = srcs/parsing/parsing.c \
 		  srcs/free/free_textures.c \
 		  srcs/free/error.c \
 		  srcs/game_init_utils.c \
-		  main.c \
-		  raytracing.c \
+		  srcs/main.c \
+		  srcs/raytracing.c \
 		  srcs/game_initialization.c \
 		  srcs/key_hook.c \
 		  srcs/movement.c \
@@ -31,25 +31,28 @@ SOURCES = srcs/parsing/parsing.c \
 		  srcs/drawing_utils2.c
 
 OBJECTS = $(SOURCES:.c=.o)
+DEPENDS = $(OBJECTS:.o=.d)
 
 all: $(NAME)
 
 $(LIBFT)/libft.a:
 	make -C $(LIBFT)
+	touch $(LIBFT)/libft.a
 
 $(NAME): $(OBJECTS) $(LIBFT)/libft.a $(LIBMLX)
 	$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT)/libft.a $(LIBS) -o $(NAME)
 
 $(LIBMLX): mlx_clone
 	@if [ ! -f "$(LIBMLX)" ]; then \
-		cmake $(MLX) -B $(MLX)/build && make -C $(MLX)/build -j4; \
+		cmake -B $(MLX)/build $(MLX); \
+		make -C $(MLX)/build -j4; \
 	fi
 
-%.o: %.c mlx_clone
+%.o: %.c $(LIBMLX)
 	$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
 
 clean:
-	rm -f $(OBJECTS)
+	rm -f $(OBJECTS) $(DEPENDS)
 	make -C $(LIBFT) clean
 
 fclean: clean
@@ -64,5 +67,6 @@ mlx_clone:
 		git clone https://github.com/codam-coding-college/MLX42.git $(MLX); \
 	fi
 
-.PHONY: all clean fclean re mlx_clone
+-include $(DEPENDS)
 
+.PHONY: all clean fclean re mlx_clone

@@ -6,7 +6,7 @@
 /*   By: karpatel <karpatel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:05:11 by karpatel          #+#    #+#             */
-/*   Updated: 2025/01/08 11:05:12 by karpatel         ###   ########.fr       */
+/*   Updated: 2025/02/01 16:07:14 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	parse_east(t_scene *scene, char *line)
 	scene->east = ft_strdup(line + start);
 	if (!scene->east)
 		perror_and_exit(scene, "Error malloc failed.", 1);
-
 	extension = ft_strrchr(scene->east, '.');
 	if (!extension || ft_strcmp(extension, ".png") != 0)
 		perror_and_exit(scene, "West texture must be a .png file.", 1);
