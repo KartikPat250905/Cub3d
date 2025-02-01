@@ -14,8 +14,9 @@
 
 void	parse_north(t_scene *scene, char *line)
 {
-	int	i;
-	int	start;
+	int		i;
+	int		start;
+	char	*extension;
 
 	start = get_path(scene, line, 2);
 	i = open(line + start, O_RDONLY);
@@ -25,12 +26,16 @@ void	parse_north(t_scene *scene, char *line)
 	scene->north = ft_strdup(line + start);
 	if (!scene->north)
 		perror_and_exit(scene, "Error malloc failed.", 1);
+	extension = ft_strrchr(scene->north, '.');
+	if (!extension || ft_strcmp(extension, ".png") != 0)
+		perror_and_exit(scene, "West texture must be a .png file.", 1);
 }
 
 void	parse_south(t_scene *scene, char *line)
 {
-	int	i;
-	int	start;
+	int		i;
+	int		start;
+	char	*extension;
 
 	start = get_path(scene, line, 2);
 	i = open(line + start, O_RDONLY);
@@ -40,12 +45,16 @@ void	parse_south(t_scene *scene, char *line)
 	scene->south = ft_strdup(line + start);
 	if (!scene->south)
 		perror_and_exit(scene, "Error malloc failed.", 1);
+	extension = ft_strrchr(scene->south, '.');
+	if (!extension || ft_strcmp(extension, ".png") != 0)
+		perror_and_exit(scene, "West texture must be a .png file.", 1);
 }
 
 void	parse_east(t_scene *scene, char *line)
 {
-	int	i;
-	int	start;
+	int		i;
+	int		start;
+	char	*extension;
 
 	start = get_path(scene, line, 2);
 	i = open(line + start, O_RDONLY);
@@ -55,12 +64,17 @@ void	parse_east(t_scene *scene, char *line)
 	scene->east = ft_strdup(line + start);
 	if (!scene->east)
 		perror_and_exit(scene, "Error malloc failed.", 1);
+
+	extension = ft_strrchr(scene->east, '.');
+	if (!extension || ft_strcmp(extension, ".png") != 0)
+		perror_and_exit(scene, "West texture must be a .png file.", 1);
 }
 
 void	parse_west(t_scene *scene, char *line)
 {
-	int	i;
-	int	start;
+	int		i;
+	int		start;
+	char	*extension;
 
 	start = get_path(scene, line, 2);
 	i = open(line + start, O_RDONLY);
@@ -70,4 +84,7 @@ void	parse_west(t_scene *scene, char *line)
 	scene->west = ft_strdup(line + start);
 	if (!scene->west)
 		perror_and_exit(scene, "Error malloc failed.", 1);
+	extension = ft_strrchr(scene->west, '.');
+	if (!extension || ft_strcmp(extension, ".png") != 0)
+		perror_and_exit(scene, "West texture must be a .png file.", 1);
 }

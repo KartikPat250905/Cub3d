@@ -26,7 +26,6 @@
 # endif
 
 char	*get_next_line(int fd);
-char	*ft_strchr(const char *string, int searchedChar);
 void	*ft_calloc(size_t elementCount, size_t elementSize);
 char	*ft_strjoin_gnl_bonus(char const *s1, char const *s2);
 size_t	ft_strlen(const char *str);
