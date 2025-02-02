@@ -17,12 +17,13 @@ int	file_valid(char *file)
 	int	i;
 	int	fd;
 
-	i = 0;
-	while (file[i])
-		i++;
+	i = ft_strlen(file);
 	while (i > 0 && file[i] != '.')
-	{
 		i--;
+	if (i == 0 || ft_strcmp(file + i, ".cub") != 0)
+	{
+		printf("Error\nThe given file is not valid.\n");
+		return (0);
 	}
 	if (file[i] && !ft_strcmp(file + i, ".cub"))
 	{

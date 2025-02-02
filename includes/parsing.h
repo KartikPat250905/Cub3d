@@ -55,6 +55,7 @@ void	parse_map(t_scene *scene, int index, int len);
 void	validate_row_extension(t_scene *scene, int index);
 void	change_space(char **file, int row, int col, int ch);
 int		empty_line(char *line);
+int		count_splits(char **splits);
 int		get_element_type(char *line);
 void	reset_scene_attributes(t_scene *scene);
 

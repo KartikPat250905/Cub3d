@@ -54,3 +54,13 @@ int	is_map_line(char *line)
 	}
 	return (1);
 }
+
+int	count_splits(char **splits)
+{
+	int	count;
+
+	count = 0;
+	while (splits[count])
+		count++;
+	return (count);
+}
