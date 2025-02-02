@@ -56,6 +56,8 @@ void	check_map_boundary_sides(t_scene *scene, int i, char **file, int index)
 	i = index;
 	while (file[i] && file[i][0])
 	{
+		if (file[i][0] != '0' && file[i][0] != '1' && !ft_isspace(file[i][0]))
+			perror_and_exit(scene, "Map has some unexpected characters.", 1);
 		if (file[i][0] != '1')
 			perror_and_exit(scene, "The given map is not closed", 1);
 		change_space(file, i, 0, 1);
@@ -64,6 +66,10 @@ void	check_map_boundary_sides(t_scene *scene, int i, char **file, int index)
 	i = index;
 	while (file[i] && file[i][ft_strlen(file[i]) - 1])
 	{
+		if (file[i][ft_strlen(file[i]) - 1] != '0'
+			&& file[i][ft_strlen(file[i]) - 1] != '1'
+			&& !ft_isspace(file[i][ft_strlen(file[i]) - 1]))
+			perror_and_exit(scene, "Map has some unexpected characters.", 1);
 		if (file[i][ft_strlen(file[i]) - 1] != '1')
 			perror_and_exit(scene, "The given map is not closed", 1);
 		change_space(file, i, ft_strlen(file[i]) - 1, 1);
@@ -80,6 +86,8 @@ void	check_borders(t_scene *scene, int index, int len)
 	i = 0;
 	while (file[index][i])
 	{
+		if (file[index][i] != '0' && file[index][i] != '1' && !ft_isspace(file[index][i]))
+			perror_and_exit(scene, "Map has some unexpected characters.", 1);
 		if (file[index][i] != '1')
 			perror_and_exit(scene, "The given map is not closed", 1);
 		change_space(file, index, i, 1);
@@ -88,6 +96,8 @@ void	check_borders(t_scene *scene, int index, int len)
 	i = 0;
 	while (file[len][i])
 	{
+		if (file[len][i] != '0' && file[len][i] != '1' && !ft_isspace(file[len][i]))
+			perror_and_exit(scene, "Map has some unexpected characters.", 1);
 		if (file[len][i] != '1' && file[len][i] != ' ')
 			perror_and_exit(scene, "The given map is not closed", 1);
 		change_space(file, len, i, 1);

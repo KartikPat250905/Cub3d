@@ -92,7 +92,7 @@ int	init_game(t_game *game, int ac, char **av)
 {
 	if (ac != 2)
 	{
-		printf("Use program as follows : \"./cub3D <map_file.cub>\"\n");
+		printf("Error\nUsage : \"./cub3D <map_file.cub>\"\n");
 		return (0);
 	}
 	game->scene = parsing_main(av);
@@ -101,7 +101,7 @@ int	init_game(t_game *game, int ac, char **av)
 	game->mlx = malloc(sizeof(t_mlx));
 	if (!game->mlx)
 	{
-		printf("Error malloc failed.");
+		printf("Error\nmalloc failed.");
 		exit (1);
 	}
 	game->plr = malloc(sizeof(t_player));

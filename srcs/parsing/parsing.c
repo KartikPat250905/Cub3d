@@ -29,7 +29,7 @@ int	file_valid(char *file)
 		fd = open(file, O_RDONLY);
 		if (fd < 0)
 		{
-			perror("Error opening file");
+			printf("Error\nThe given file might not exist.\n");
 			return (0);
 		}
 		close(fd);
@@ -103,12 +103,8 @@ t_scene	*parsing_main(char **argv)
 	int		len;
 
 	if (!file_valid(argv[1]))
-	{
-		printf("Error\n");
 		return (NULL);
-	}
 	scene = ft_calloc(1, sizeof(t_scene));
-	scene->total_attr = 0;
 	if (!scene)
 		perror_and_exit(scene, "Error malloc failed.", 1);
 	scene->cieling_color = malloc(sizeof(int) * 3);

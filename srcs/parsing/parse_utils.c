@@ -32,3 +32,25 @@ void	check_if_data_fetched(t_scene *scene)
 	if (!scene->map)
 		perror_and_exit(scene, "Some error occured while parsing.", 1);
 }
+
+int	is_map_line(char *line)
+{
+	char	*temp;
+	size_t	i;
+
+	temp = line;
+	i = 0;
+	if (empty_line(line))
+		return (0);
+	while (line[i])
+	{
+		if (line[i] != '1' && line[i] != '0' && line[i] != 'N' && 
+			line[i] != 'S' && line[i] != 'E' && line[i] != 'W' && line[i] != ' ' && !ft_isspace(line[i]))
+		{
+			if (!(i == (ft_strlen(temp) - 1) && temp[ft_strlen(temp) - 1] == '\n'))
+				return (0);
+		}
+		i++;
+	}
+	return (1);
+}

@@ -18,6 +18,7 @@ void	parse_north(t_scene *scene, char *line)
 	int		start;
 	char	*extension;
 
+	scene->has_north = 1;
 	start = get_path(scene, line, 2);
 	i = open(line + start, O_RDONLY);
 	if (i < 0)
@@ -37,6 +38,7 @@ void	parse_south(t_scene *scene, char *line)
 	int		start;
 	char	*extension;
 
+	scene->has_south = 1;
 	start = get_path(scene, line, 2);
 	i = open(line + start, O_RDONLY);
 	if (i < 0)
@@ -56,6 +58,7 @@ void	parse_east(t_scene *scene, char *line)
 	int		start;
 	char	*extension;
 
+	scene->has_east = 1;
 	start = get_path(scene, line, 2);
 	i = open(line + start, O_RDONLY);
 	if (i < 0)
@@ -75,6 +78,7 @@ void	parse_west(t_scene *scene, char *line)
 	int		start;
 	char	*extension;
 
+	scene->has_west = 1;
 	start = get_path(scene, line, 2);
 	i = open(line + start, O_RDONLY);
 	if (i < 0)
