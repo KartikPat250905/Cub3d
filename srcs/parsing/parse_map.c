@@ -77,16 +77,15 @@ void	check_map_boundary_sides(t_scene *scene, int i, char **file, int index)
 	}
 }
 
-void	check_borders(t_scene *scene, int index, int len)
+void	check_borders(t_scene *scene, int index, int len, char **file)
 {
 	int		i;
-	char	**file;
 
-	file = scene->file;
 	i = 0;
 	while (file[index][i])
 	{
-		if (file[index][i] != '0' && file[index][i] != '1' && !ft_isspace(file[index][i]))
+		if (file[index][i] != '0' && file[index][i] != '1'
+			&& !ft_isspace(file[index][i]))
 			perror_and_exit(scene, "Map has some unexpected characters.", 1);
 		if (file[index][i] != '1')
 			perror_and_exit(scene, "The given map is not closed", 1);
@@ -96,7 +95,8 @@ void	check_borders(t_scene *scene, int index, int len)
 	i = 0;
 	while (file[len][i])
 	{
-		if (file[len][i] != '0' && file[len][i] != '1' && !ft_isspace(file[len][i]))
+		if (file[len][i] != '0' && file[len][i] != '1'
+			&& !ft_isspace(file[len][i]))
 			perror_and_exit(scene, "Map has some unexpected characters.", 1);
 		if (file[len][i] != '1' && file[len][i] != ' ')
 			perror_and_exit(scene, "The given map is not closed", 1);
@@ -113,7 +113,7 @@ void	parse_map(t_scene *scene, int index, int len)
 	if (scene->total_attr != 6)
 		perror_and_exit(scene, "The order of the attributes in .cub"
 			"file is not as expected.", 1);
-	check_borders(scene, index, len - 1);
+	check_borders(scene, index, len - 1, scene->file);
 	validate_row_extension(scene, index);
 	is_valid(scene, scene->file, index, 0);
 	scene->map = ft_calloc(len - index + 1, sizeof(char *));

@@ -29,8 +29,7 @@ void	add_rgb(t_scene *scene, char **splits, int who, char *no_spaces)
 		if (!splits[i])
 			perror_and_exit(scene, "Missing values for colors.", 1);
 		if (!ft_is_num_str(splits[i]))
-			perror_and_exit(scene, "Error the color values "
-				"are not integers.", 1);
+			perror_and_exit(scene, "Error with color values ", 1);
 		color[i] = ft_atoi(splits[i]);
 		if (color[i] < 0 || color[i] > 255)
 			perror_and_exit(scene, "Error with the color values.", 1);

@@ -40,9 +40,6 @@ int	main(int ac, char **av)
 		free(game);
 		return (1);
 	}
-	int i = 0;
-	while (game->scene->file[i])
-		printf("%s\n", game->scene->file[i++]);
 	mlx_loop_hook(game->mlx->mlx, game_loop, (void *)game);
 	mlx_key_hook(game->mlx->mlx, key_hook, (void *)game);
 	mlx_loop(game->mlx->mlx);

@@ -26,6 +26,28 @@ int	get_path(t_scene *scene, char *line, int i)
 	return (start);
 }
 
+void	fill_data_helper(t_scene *scene, t_etype type, char *line)
+{
+	if (type == PARSE_SOUTH)
+	{
+		if (scene->has_south)
+			perror_and_exit(scene, "Duplicate attributes.", 1);
+		parse_south(scene, line);
+	}
+	else if (type == PARSE_CEILING)
+	{
+		if (scene->has_ciel)
+			perror_and_exit(scene, "Duplicate attributes.", 1);
+		parse_color(scene, line, 1);
+	}
+	else if (type == PARSE_FLOOR)
+	{
+		if (scene->has_floor)
+			perror_and_exit(scene, "Duplicate attributes.", 1);
+		parse_color(scene, line, 0);
+	}
+}
+
 void	fill_data(t_scene *scene, t_etype type, char *line)
 {
 	if (type == PARSE_NORTH)
@@ -45,23 +67,5 @@ void	fill_data(t_scene *scene, t_etype type, char *line)
 		if (scene->has_west)
 			perror_and_exit(scene, "Duplicate attributes.", 1);
 		parse_west(scene, line);
-	}
-	else if (type == PARSE_SOUTH)
-	{
-		if (scene->has_south)
-			perror_and_exit(scene, "Duplicate attributes.", 1);
-		parse_south(scene, line);
-	}
-	else if (type == PARSE_CEILING)
-	{
-		if (scene->has_ciel)
-			perror_and_exit(scene, "Duplicate attributes.", 1);
-		parse_color(scene, line, 1);
-	}
-	else if (type == PARSE_FLOOR)
-	{
-		if (scene->has_floor)
-			perror_and_exit(scene, "Duplicate attributes.", 1);
-		parse_color(scene, line, 0);
 	}
 }

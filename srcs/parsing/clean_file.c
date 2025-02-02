@@ -84,25 +84,6 @@ void	add_line_to_scene(t_scene *scene, char *line, int i)
 	scene->file[i] = line;
 }
 
-void	new_line_in_map(t_scene *scene, int fd, char *file)
-{
-	char	*line;
-
-	fd = open(file, O_RDONLY);
-	if (!fd)
-		perror_and_exit(scene, "Error open failed.", 1);
-	scene->map_started = 0;
-	while (get_line(&line, fd))
-	{
-		if (!scene->map_started && is_map_line(line))
-			scene->map_started = 1;
-		if (scene->map_started && empty_line(line))
-			perror_and_exit(scene, "Map has multiple consecutive newlines.", 1);
-		free(line);
-	}
-	close(fd);
-}
-
 int	compress_file(t_scene *scene, char *file)
 {
 	int		fd;
