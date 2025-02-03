@@ -68,4 +68,5 @@ void	fill_data(t_scene *scene, t_etype type, char *line)
 			perror_and_exit(scene, "Duplicate attributes.", 1);
 		parse_west(scene, line);
 	}
+	fill_data_helper(scene, type, line);
 }

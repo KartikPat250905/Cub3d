@@ -110,6 +110,7 @@ void	parse_map(t_scene *scene, int index, int len)
 {
 	int	i;
 
+	scene->has_map = 1;
 	if (scene->total_attr != 6)
 		perror_and_exit(scene, "The order of the attributes in .cub"
 			"file is not as expected.", 1);

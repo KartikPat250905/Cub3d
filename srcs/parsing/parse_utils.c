@@ -24,12 +24,12 @@ void	change_space(char **file, int row, int col, int ch)
 
 void	check_if_data_fetched(t_scene *scene)
 {
-	if (!scene->north || !scene->south
-		|| !scene->east || !scene->west)
+	if (!scene->has_north || !scene->has_south
+		|| !scene->has_east || !scene->has_west)
 		perror_and_exit(scene, "Some error occured while parsing.", 1);
-	if (!scene->cieling_color || !scene->floor_color)
+	if (!scene->has_ciel || !scene->has_floor)
 		perror_and_exit(scene, "Some error occured while parsing.", 1);
-	if (!scene->map)
+	if (!scene->has_map)
 		perror_and_exit(scene, "Some error occured while parsing.", 1);
 }
 
