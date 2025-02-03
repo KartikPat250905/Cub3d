@@ -6,7 +6,7 @@
 /*   By: karpatel <karpatel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:48:58 by karpatel          #+#    #+#             */
-/*   Updated: 2025/02/01 15:55:40 by motuomin         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:05:24 by jelloster        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ static t_player	*set_starting_pos(t_game *game, t_player *player)
 				|| game->scene->map[x][y] == 'E'
 				|| game->scene->map[x][y] == 'W')
 			{
-				player->pos_x = (float)y;
-				player->pos_y = (float)x;
+				player->pos_x = (float)y + 0.5f;
+				player->pos_y = (float)x + 0.5f;
 				get_angle(game->scene->map[x][y], player);
 				set_angle(player, game->scene->map[x][y]);
 				break ;
