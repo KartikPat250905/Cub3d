@@ -43,8 +43,8 @@ typedef struct s_draw
 	int			line_height;
 	int			draw_start;
 	int			draw_end;
-	int			tex_y;
-	int			tex_x;
+	uint32_t	tex_y;
+	uint32_t	tex_x;
 	int			color;
 	int			r;
 	int			g;
@@ -122,6 +122,7 @@ typedef enum e_type
 # define SPEED		1
 # define R_SPEED	1.5707963268
 # define TILE_SIZE	64
+# define BPP		4
 
 // COLORS
 //					0xRRGGBBAA

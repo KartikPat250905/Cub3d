@@ -76,6 +76,7 @@ static void	draw_floor(t_game *game, int x)
 void	draw_column(t_game *game, int x)
 {
 	t_draw	d;
+	uint8_t	*start;
 
 	get_draw_info(&d, game);
 	draw_ceiling(game, x);
@@ -83,13 +84,15 @@ void	draw_column(t_game *game, int x)
 	while (d.draw_start < d.draw_end)
 	{
 		get_texture_pixel(&d, game);
-		d.color = ((int *)d.texture->pixels) \
-			[d.tex_y * d.texture->width + d.tex_x];
-		d.a = (d.color >> 24) & 0xFF;
-		d.r = (d.color >> 16) & 0xFF;
-		d.g = (d.color >> 8) & 0xFF;
-		d.b = d.color & 0xFF;
-		d.color = get_color(d.r, d.g, d.b, d.a);
+		if (d.tex_x >= d.texture->width || d.tex_y >= d.texture->height)
+			d.color = 0xFF000000;
+		else
+		{
+			start = d.texture->pixels + (d.tex_y * d.texture->width \
+				+ d.tex_x) * BPP;
+			d.color = get_color(*start, *(start + 1), *(start + 2), \
+				*(start + 3));
+		}
 		mlx_put_pixel(game->mlx->img, x, d.draw_start, d.color);
 		d.draw_start++;
 	}
