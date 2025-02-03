@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 18:07:15 by motuomin          #+#    #+#             */
-/*   Updated: 2025/01/09 18:30:13 by motuomin         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:38:46 by jelloster        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	get_texture_pixel(t_draw *d, t_game *game)
 {
 	d->tex_y = (int)((float)d->texture->height * (((float)d->draw_start - \
 		((float)SCREEN_H - d->line_height) / 2) / d->line_height));
-	if (d->tex_y < 0)
-		d->tex_y = 0;
 	if ((unsigned int)d->tex_y >= (unsigned int)d->texture->height)
 		d->tex_y = d->texture->height - 1;
 	if (game->ray.side == 'h')
@@ -26,12 +24,8 @@ void	get_texture_pixel(t_draw *d, t_game *game)
 	else
 		d->tex_x = (int)((1.0 - (float)(game->ray.dir_x * game->ray.final_dist \
 		- game->ray.map_x)) * d->texture->width) % d->texture->width;
-	if (d->tex_x < 0)
-		d->tex_x = 0;
 	if ((unsigned int)d->tex_x >= (unsigned int)d->texture->width)
 		d->tex_x = d->texture->width - 1;
-	if (d->tex_y < 0)
-		d->tex_y = 0;
 	if ((unsigned int)d->tex_y >= (unsigned int)d->texture->height)
 		d->tex_y = d->texture->height - 1;
 }
