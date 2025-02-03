@@ -6,44 +6,21 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:35:56 by motuomin          #+#    #+#             */
-/*   Updated: 2025/01/07 13:37:30 by motuomin         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:57:59 by jelloster        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-/*
-void	print_map(char **map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-			printf("%c ", map[i][j++]);
-		printf("\n");
-		i++;
-	}
-	printf("\n");
-}*/
-
 static void	move_plr(float move_x, float move_y, t_player *p, t_scene *s)
 {
+	if (s->map[(int)p->pos_y][(int)(p->pos_x + move_x)] != '0'
+		&& s->map[(int)p->pos_y][(int)(p->pos_x + move_x)] != '1')
+		s->map[(int)p->pos_y][(int)(p->pos_x + move_x)] = '0';
 	if (s->map[(int)p->pos_y][(int)(p->pos_x + move_x)] == '0')
-	{
-		s->map[(int)p->pos_y][(int)p->pos_x] = '0';
 		p->pos_x += move_x ;
-		s->map[(int)p->pos_y][(int)p->pos_x] = 'C';
-	}
 	if (s->map[(int)(p->pos_y + move_y)][(int)p->pos_x] == '0')
-	{
-		s->map[(int)p->pos_y][(int)p->pos_x] = '0';
 		p->pos_y += move_y;
-		s->map[(int)p->pos_y][(int)p->pos_x] = 'C';
-	}
 }
 
 void	move(t_scene *s, t_player *p, t_dir dir)

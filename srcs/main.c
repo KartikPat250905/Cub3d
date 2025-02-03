@@ -41,6 +41,7 @@ int	main(int ac, char **av)
 		return (1);
 	}
 	mlx_loop_hook(game->mlx->mlx, game_loop, (void *)game);
+	mlx_loop_hook(game->mlx->mlx, movement_hook, (void *)game);
 	mlx_key_hook(game->mlx->mlx, key_hook, (void *)game);
 	mlx_loop(game->mlx->mlx);
 	return (0);

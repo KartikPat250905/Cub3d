@@ -119,8 +119,9 @@ typedef enum e_type
 # define PI			3.14159265358979323846
 # define SCREEN_W	700
 # define SCREEN_H	500
-# define SPEED		1
-# define R_SPEED	1.5707963268
+# define SPEED		0.05
+# define R_SPEED	0.05
+//# define R_SPEED	1.5707963268
 # define TILE_SIZE	64
 # define BPP		4
 
@@ -152,6 +153,7 @@ void	get_texture_pixel(t_draw *d, t_game *game);
 
 //		srcs/key_hook.c
 void	key_hook(mlx_key_data_t keydata, void *param);
+void	movement_hook(void *param);
 
 //		srcs/movement.c
 void	move(t_scene *s, t_player *p, t_dir dir);

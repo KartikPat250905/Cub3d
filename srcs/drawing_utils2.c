@@ -19,11 +19,11 @@ void	get_texture_pixel(t_draw *d, t_game *game)
 	if ((unsigned int)d->tex_y >= (unsigned int)d->texture->height)
 		d->tex_y = d->texture->height - 1;
 	if (game->ray.side == 'h')
-		d->tex_x = (int)((1.0 - (float)(game->ray.dir_y * game->ray.final_dist \
-		- game->ray.map_y)) * d->texture->width) % d->texture->width;
+		d->tex_x = (int)((game->plr->pos_y + game->ray.final_dist \
+		* game->ray.dir_y) * d->texture->width) % d->texture->width;
 	else
-		d->tex_x = (int)((1.0 - (float)(game->ray.dir_x * game->ray.final_dist \
-		- game->ray.map_x)) * d->texture->width) % d->texture->width;
+		d->tex_x = (int)((game->plr->pos_x + game->ray.final_dist \
+		* game->ray.dir_x) * d->texture->width) % d->texture->width;
 	if ((unsigned int)d->tex_x >= (unsigned int)d->texture->width)
 		d->tex_x = d->texture->width - 1;
 	if ((unsigned int)d->tex_y >= (unsigned int)d->texture->height)
