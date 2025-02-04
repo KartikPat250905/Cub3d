@@ -1,7 +1,7 @@
 NAME = cub3D
 CC = cc
 INCLUDES = -Iincludes -I $(MLX)/include
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 LIBFT = ./libft
 
 # MLX

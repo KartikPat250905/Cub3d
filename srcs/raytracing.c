@@ -6,7 +6,7 @@
 /*   By: karpatel <karpatel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 14:43:14 by karpatel          #+#    #+#             */
-/*   Updated: 2025/02/01 14:17:01 by motuomin         ###   ########.fr       */
+/*   Updated: 2025/02/04 19:03:21 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int	raycast_loop(t_game *game, t_scene *scene,
 {
 	int	x;
 
+	movement_hook(game);
 	x = -1;
 	while (++x < SCREEN_W)
 	{
@@ -103,7 +104,5 @@ int	raycast_loop(t_game *game, t_scene *scene,
 			ray->final_dist = ray->plr_len_y - ray->len_y_stp;
 		draw_column(game, x);
 	}
-	if (mlx_image_to_window(game->mlx->mlx, game->mlx->img, 0, 0) < 0)
-		exit (1);
 	return (0);
 }

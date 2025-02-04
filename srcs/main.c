@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:46:11 by motuomin          #+#    #+#             */
-/*   Updated: 2025/02/01 15:53:53 by motuomin         ###   ########.fr       */
+/*   Updated: 2025/02/04 19:11:03 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	main(int ac, char **av)
 		return (1);
 	}
 	mlx_loop_hook(game->mlx->mlx, game_loop, (void *)game);
-	mlx_loop_hook(game->mlx->mlx, movement_hook, (void *)game);
 	mlx_key_hook(game->mlx->mlx, key_hook, (void *)game);
 	mlx_loop(game->mlx->mlx);
 	return (0);
