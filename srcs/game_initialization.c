@@ -6,7 +6,7 @@
 /*   By: karpatel <karpatel@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 11:48:58 by karpatel          #+#    #+#             */
-/*   Updated: 2025/02/04 19:11:45 by motuomin         ###   ########.fr       */
+/*   Updated: 2025/02/04 19:13:06 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	init_mlx(t_scene *scene, t_mlx *mlx)
 		exit(EXIT_FAILURE);
 	}
 	mlx->img = mlx_new_image(mlx->mlx, SCREEN_W, SCREEN_H);
-	if (mlx_image_to_window(game->mlx->mlx, game->mlx->img, 0, 0) < 0)
+	if (mlx_image_to_window(mlx->mlx, mlx->img, 0, 0) < 0)
 	{
 		free_and_exit(scene, EXIT_FAILURE);
 		exit(EXIT_FAILURE);
