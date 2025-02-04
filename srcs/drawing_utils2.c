@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 18:07:15 by motuomin          #+#    #+#             */
-/*   Updated: 2025/02/03 11:38:46 by jelloster        ###   ########.fr       */
+/*   Updated: 2025/02/04 19:16:32 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	get_draw_info(t_draw *d, t_game *game)
 		d->draw_start = 0;
 	d->draw_end = d->line_height / 2 + SCREEN_H / 2;
 	if (d->draw_end > SCREEN_H)
-		d->draw_end = SCREEN_H - 1;
+		d->draw_end = SCREEN_H;
 	if (game->ray.side == 'h')
 	{
 		if (game->ray.dir_x > 0)
