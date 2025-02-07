@@ -3,7 +3,7 @@ C 255,13,0
 EA ./textures/PIPES_1A.png
 NO ./textures/SLIME_1A.png
 SO ./textures/SLUDGE_1A.png
-WE ./textures/GRID_2B.png
+WE ./textures/HEDGE_1A.png
 
 111111111111111
 100000100010001
