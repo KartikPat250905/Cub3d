@@ -20,7 +20,7 @@ void	add_rgb(t_scene *scene, char **splits, int who, char *no_spaces)
 	i = 0;
 	if (count_splits(splits) != 3)
 		perror_and_exit(scene, "Extra comma is rgb values.", 1);
-	if (who == 1)
+	if (who != 1)
 		color = scene->floor_color;
 	else
 		color = scene->cieling_color;
