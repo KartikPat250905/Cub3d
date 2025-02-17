@@ -86,6 +86,7 @@ void	free_and_exit(t_scene *scene, int code)
 	if (scene -> file)
 		free_file(scene);
 	free_colors(scene);
+	free(scene);
 	scene = NULL;
 	exit(code);
 }

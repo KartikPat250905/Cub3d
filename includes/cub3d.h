@@ -174,5 +174,5 @@ int		get_line(char **line, int fd);
 t_scene	*parsing_main(char **argv);
 void	trim_spaces(t_scene *scene, char **line);
 void	perror_and_exit(t_scene *scene, char *str, int exit);
-
+t_game	*get_game(void);
 #endif

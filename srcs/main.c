@@ -12,6 +12,13 @@
 
 #include "../includes/cub3d.h"
 
+t_game	*get_game(void)
+{
+	static t_game	info;
+
+	return (&info);
+}
+
 static void	game_loop(void *ptr)
 {
 	t_game	*game;
@@ -29,7 +36,7 @@ int	main(int ac, char **av)
 		printf("Error\nPlease provide a valid file\n");
 		return (1);
 	}
-	game = malloc(sizeof(t_game));
+	game = get_game();
 	if (!game)
 	{
 		printf("Error\nmalloc failed.");
