@@ -40,14 +40,9 @@ int	main(int ac, char **av)
 		free(game);
 		return (1);
 	}
-	// printf("The north texture is %s\n", game->scene -> north);
-	// printf("The sorth texture is %s\n", game->scene -> south);
-	// printf("The east texture is %s\n", game->scene -> east);
-	// printf("The west texture is %s\n", game->scene -> west);
-	// printf("The floor R=%d G=%d and B=%d\n", game->scene -> floor_color[0], game->scene->floor_color[1],game->scene->floor_color[2]);
-	// printf("The cieling R=%d G=%d and B=%d\n", game->scene -> cieling_color[0], game->scene->cieling_color[1],game->scene->cieling_color[2]);
 	mlx_loop_hook(game->mlx->mlx, game_loop, (void *)game);
 	mlx_key_hook(game->mlx->mlx, key_hook, (void *)game);
+	mlx_close_hook(game->mlx->mlx, close_hook, game);
 	mlx_loop(game->mlx->mlx);
 	return (0);
 }

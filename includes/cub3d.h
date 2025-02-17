@@ -154,6 +154,7 @@ void	get_texture_pixel(t_draw *d, t_game *game);
 //		srcs/key_hook.c
 void	key_hook(mlx_key_data_t keydata, void *param);
 void	movement_hook(void *param);
+void	close_hook(void *param);
 
 //		srcs/movement.c
 void	move(t_scene *s, t_player *p, t_dir dir);

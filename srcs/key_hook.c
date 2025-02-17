@@ -25,6 +25,16 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	}
 }
 
+void	close_hook(void *param)
+{
+	t_game	*game;
+
+	game = (t_game *)param;
+	free_textures_mlx(game->mlx);
+	free_game(game);
+	free_and_exit(game->scene, EXIT_SUCCESS);
+}
+
 void	movement_hook(void *param)
 {
 	t_game	*game;
