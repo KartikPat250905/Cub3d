@@ -74,11 +74,15 @@ void	parse_color(t_scene *scene, char *line, int is_cieling)
 	int	start;
 
 	if (line[ft_strlen(line) - 1] == ',')
-		perror_and_exit(scene, "Extra comma at the end of the colors.", 1);
+		perror_and_exit(scene, "Extra comma at for the colors.", 1);
 	start = get_path(scene, line, 1);
+	if (line[start] == ',')
+		perror_and_exit(scene, "Extra comma at for the colors.", 1);
 	if (is_cieling)
 		scene->has_ciel = 1;
 	else
 		scene->has_floor = 1;
+	if (ft_strnstr(line + start, ",,", ft_strlen(line + start)))
+		perror_and_exit(scene, "Error: Consecutive commas in RGB values.", 1);
 	get_colors(scene, line + start, is_cieling);
 }
