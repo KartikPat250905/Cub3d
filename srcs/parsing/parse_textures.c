@@ -12,6 +12,27 @@
 
 #include "cub3d.h"
 
+int	file_check(const char *filename, t_scene *scene)
+{
+	int		fd;
+	char	buffer;
+	ssize_t	bytes_read;
+
+	fd = open(filename, O_RDONLY);
+	if (fd == -1)
+		perror_and_exit(scene, "Error opening file", 1);
+	while ((bytes_read = read(fd, &buffer, 1)) > 0)
+	{
+		if (buffer != ' ' && buffer != '\n' && buffer != '\t')
+		{
+			close(fd);
+			return (0);
+		}
+	}
+	close(fd);
+	return (1);
+}
+
 void	parse_north(t_scene *scene, char *line)
 {
 	int		i;
@@ -21,7 +42,7 @@ void	parse_north(t_scene *scene, char *line)
 	scene->has_north = 1;
 	start = get_path(scene, line, 2);
 	i = open(line + start, O_RDONLY);
-	if (i < 0)
+	if (i < 0 || !ft_strcmp(line + start, ".png") || !file_check(line + start, scene))
 		perror_and_exit(scene, "Open failed north", 1);
 	close(i);
 	scene->north = ft_strdup(line + start);
@@ -41,7 +62,7 @@ void	parse_south(t_scene *scene, char *line)
 	scene->has_south = 1;
 	start = get_path(scene, line, 2);
 	i = open(line + start, O_RDONLY);
-	if (i < 0)
+	if (i < 0 || !ft_strcmp(line + start, ".png") || !file_check(line + start, scene))
 		perror_and_exit(scene, "Open failed south", 1);
 	close(i);
 	scene->south = ft_strdup(line + start);
@@ -61,7 +82,7 @@ void	parse_east(t_scene *scene, char *line)
 	scene->has_east = 1;
 	start = get_path(scene, line, 2);
 	i = open(line + start, O_RDONLY);
-	if (i < 0)
+	if (i < 0 || !ft_strcmp(line + start, ".png") || !file_check(line + start, scene))
 		perror_and_exit(scene, "Open failed east", 1);
 	close(i);
 	scene->east = ft_strdup(line + start);
@@ -81,7 +102,7 @@ void	parse_west(t_scene *scene, char *line)
 	scene->has_west = 1;
 	start = get_path(scene, line, 2);
 	i = open(line + start, O_RDONLY);
-	if (i < 0)
+	if (i < 0 || !ft_strcmp(line + start, ".png") || !file_check(line + start, scene))
 		perror_and_exit(scene, "Open failed west", 1);
 	close(i);
 	scene->west = ft_strdup(line + start);

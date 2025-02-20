@@ -31,7 +31,7 @@ int	main(int ac, char **av)
 {
 	t_game	*game;
 
-	if (av[1] && ft_strlen(av[1]) <= 4)
+	if (av[1] && (ft_strlen(av[1]) <= 4 || !ft_strcmp(av[1], "./.cub")))
 	{
 		printf("Error\nPlease provide a valid file\n");
 		return (1);
@@ -44,7 +44,6 @@ int	main(int ac, char **av)
 	}
 	if (!init_game(game, ac, av))
 	{
-		free(game);
 		return (1);
 	}
 	mlx_loop_hook(game->mlx->mlx, game_loop, (void *)game);
